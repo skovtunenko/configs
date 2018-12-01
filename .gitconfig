@@ -1,0 +1,21 @@
+[user]
+	name = Sergio Kovtunenko
+	email = skovtunenko@exadel.com
+[core]
+	editor = code
+	autocrlf = input
+	excludesfile = /Users/skovtunenko/.gitignore_global
+[color]
+	ui = true
+[mergetool]
+	keepBackup = false
+[merge]
+	commit = no
+	ff = no
+[commit]
+	template = /Users/skovtunenko/.stCommitMsg
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
