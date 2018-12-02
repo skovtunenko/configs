@@ -1,0 +1,170 @@
+// Place your settings in this file to overwrite the default settings
+{
+//-------- Telemetry configuration --------
+    
+    // Enable usage data and errors to be sent to Microsoft.
+    "telemetry.enableTelemetry": false,
+    // Enable crash reports to be sent to Microsoft.
+	// This option requires restart to take effect.
+    "telemetry.enableCrashReporter": false,
+    
+    //-------- Editor configuration --------
+    "editor.fontSize": 12,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.cursorStyle": "line",
+    "editor.scrollBeyondLastLine": false,
+    "editor.minimap.enabled": false,
+    "editor.cursorBlinking": "smooth",
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "all",
+    "editor.renderControlCharacters": true,
+    "editor.trimAutoWhitespace": true,
+    "editor.dragAndDrop": false,
+    
+    //-------- Window configuration --------
+    "window.zoomLevel": 0,
+    "debug.toolBarLocation":"docked",
+    
+    //-------- Extensions configuration --------
+    "extensions.ignoreRecommendations": true,
+    "extensions.showRecommendationsOnlyOnDemand": true,
+    
+    //-------- Git configuration --------
+    "git.enabled": true,
+
+    //-------- Terminal configuration --------
+    "terminal.integrated.fontFamily": "'Fira Code'",
+    "terminal.integrated.copyOnSelection": true,
+    "workbench.fontAliasing": "default",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.editor.swipeToNavigate": true,
+
+    //-------- Golang configuration --------
+     // Configure editor settings to be overridden for [go] language.
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true,
+        "editor.codeLens": true,
+        "editor.autoClosingBrackets": true,
+        "editor.tabSize": 8,
+        "editor.useTabStops": false,
+        
+    },
+    "go.lintTool": "golangci-lint",
+    "go.vetFlags": [
+        "-all",
+        "-shadow"
+    ],
+    "go.vetOnSave": "package",
+    "go.lintOnSave": "file",
+    "go.formatTool": "goreturns",
+    "go.formatFlags": [],
+    "go.docsTool": "gogetdoc",
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.autocompleteUnimportedPackages": true,
+    "go.editorContextMenuCommands": {
+        "toggleTestFile": true,
+        "addTags": true,
+        "removeTags": false,
+        "testAtCursor": true,
+        "testFile": true,
+        "testPackage": false,
+        "generateTestForFunction": true,
+        "generateTestForFile": false,
+        "generateTestForPackage": true,
+        "addImport": true,
+        "testCoverage": true,
+        "playground": false,
+    },
+    "go.enableCodeLens": {
+        "references": false,
+        "runtest": true
+    },
+    "go.gotoSymbol.includeGoroot": true,
+    "go.gotoSymbol.includeImports": true,
+    "go.testFlags": ["-race", "-v", "-cpu=1,2,4,"],
+    
+    //-------- Zenmode configuration --------
+    "zenMode.hideStatusBar": false,
+
+    //-------- Sync configuration --------
+    "sync.gist": "313835ff91fabab9a65e072b76a1a0f1",
+    "sync.lastUpload": "2018-03-25T16:53:06.159Z",
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.lastDownload": "",
+    "sync.forceDownload": false,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "sync.quietSync": false,
+    "sync.askGistName": false,
+
+    //-------- Icon configuration --------
+    "vsicons.dontShowNewVersionMessage": true,
+    
+    //-------- Markdown configuration --------
+    "markdown.preview.breaks": true,
+
+    //-------- Files configuration --------
+    "files.autoSave": "afterDelay",
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "workbench.colorTheme": "One Dark Pro",
+
+    //-------- CoreRunner configuration --------
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run -race",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "ts-node",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runhaskell",
+        "nim": "nim compile --verbosity:0 --hints:off --run"
+    },
+    "breadcrumbs.enabled": true,
+    "githubPullRequests.telemetry.enabled": false,
+    "goOutliner.extendExplorerTab": true,
+    "githubPullRequests.hosts": [
+        {
+            "host": "https://github.com",
+            "username": "oauth",
+            "token": "system"
+        }
+    ],
+    "workbench.iconTheme": "vscode-icons"
+}
