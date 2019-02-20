@@ -1,0 +1,72 @@
+4. Command-line editing
+
+Get to the command-line with the ':', '!', '/' or '?' commands. Normal characters are inserted at the current cursor position.
+"Completion" below refers to context-sensitive completion.  It will complete file names, tags, commands etc. as appropriate.
+
+tag		command	      action in Command-line editing mode
+------------------------------------------------------------------------------
+CTRL-@		not used
+CTRL-A		do completion on the pattern in front of the cursor and insert all matches
+CTRL-B		cursor to begin of command-line
+CTRL-C		same as <Esc>
+CTRL-D		list completions that match the pattern in front of the cursor
+CTRL-E		cursor to end of command-line
+CTRL-F		default value for 'cedit': opens the command-line window; otherwise not used
+CTRL-G		next match when 'incsearch' is active
+<BS>		delete the character in front of the cursor
+{char1} <BS> {char2} enter digraph when 'digraph' is on
+CTRL-H		same as <BS>
+<Tab>		if 'wildchar' is <Tab>: Do completion on the pattern in front of the cursor
+<S-Tab>		same as CTRL-P
+'wildchar'	Do completion on the pattern in front of the cursor (default: <Tab>)
+CTRL-I		same as <Tab>
+<NL>		same as <CR>
+CTRL-J		same as <CR>
+CTRL-K {char1} {char2} enter digraph
+CTRL-L		do completion on the pattern in front of the cursor and insert the longest common part
+<CR>		execute entered command
+CTRL-M		same as <CR>
+CTRL-N		after using 'wildchar' with multiple matches: go to next match, otherwise: recall older command-line from history.
+CTRL-O		not used
+CTRL-P		after using 'wildchar' with multiple matches: go to previous match, otherwise: recall older command-line from history.
+CTRL-Q		same as CTRL-V, unless it's used for terminal control flow
+CTRL-R {0-9a-z"%#*:= CTRL-F CTRL-P CTRL-W CTRL-A}
+                insert the contents of a register or object under the cursor as if typed
+CTRL-R CTRL-R {0-9a-z"%#*:= CTRL-F CTRL-P CTRL-W CTRL-A}
+                insert the contents of a register or object under the cursor literally
+CTRL-S		(used for terminal control flow)
+CTRL-T		previous match when 'incsearch' is active
+CTRL-U		remove all characters
+CTRL-V		insert next non-digit literally, insert three digit decimal number as a single byte.
+CTRL-W		delete the word in front of the cursor
+CTRL-X		not used (reserved for completion)
+CTRL-Y		copy (yank) modeless selection
+CTRL-Z		not used (reserved for suspend)
+<Esc>		abandon command-line without executing it
+CTRL-[		same as <Esc>
+CTRL-\ CTRL-N	go to Normal mode, abandon command-line
+CTRL-\ CTRL-G	go to mode specified with 'insertmode', abandon command-line
+CTRL-\ a - d	reserved for extensions
+CTRL-\ e {expr} replace the command line with the result of {expr}
+CTRL-\ f - z	reserved for extensions
+CTRL-\ others	not used
+CTRL-]		trigger abbreviation
+CTRL-^		toggle use of |:lmap| mappings
+CTRL-_		when 'allowrevins' set: change language (Hebrew)
+<Del>		delete the character under the cursor
+<Left>		cursor left
+<S-Left>	cursor one word left
+<C-Left>	cursor one word left
+<Right>		cursor right
+<S-Right>	cursor one word right
+<C-Right>	cursor one word right
+<Up>		recall previous command-line from history that matches pattern in front of the cursor
+<S-Up>		recall previous command-line from history
+<Down>		recall next command-line from history that matches pattern in front of the cursor
+<S-Down>	recall next command-line from history
+<Home>		cursor to start of command-line
+<End>		cursor to end of command-line
+<PageDown>	same as <S-Down>
+<PageUp>	same as <S-Up>
+<Insert>	toggle insert/overstrike mode
+<LeftMouse>	cursor at mouse click

@@ -1,0 +1,88 @@
+3. Visual mode
+
+Most commands in Visual mode are the same as in Normal mode. The ones listed here are those that are different.
+
+tag		command	      note action in Visual mode
+------------------------------------------------------------------------------
+CTRL-\ CTRL-N	   stop Visual mode
+CTRL-\ CTRL-G	   go to mode specified with 'insertmode'
+CTRL-A		2  add N to number in highlighted text
+CTRL-C		   stop Visual mode
+CTRL-G		   toggle between Visual mode and Select mode
+<BS>		2  Select mode: delete highlighted area
+CTRL-H		2  same as <BS>
+CTRL-O		   switch from Select to Visual mode for one command
+CTRL-V		   make Visual mode blockwise or stop Visual mode
+CTRL-X		2  subtract N from number in highlighted text
+<Esc>		   stop Visual mode
+CTRL-]		   jump to highlighted tag
+!{filter}	2  filter the highlighted lines through the external command {filter}
+:		   start a command-line with the highlighted lines as a range
+<		2  shift the highlighted lines one 'shiftwidth' left
+=		2  filter the highlighted lines through the external program given with the 'equalprg' option
+>		2  shift the highlighted lines one 'shiftwidth' right
+A		2  block mode: append same text in all lines, after the highlighted area
+C		2  delete the highlighted lines and start insert
+D		2  delete the highlighted lines
+I		2  block mode: insert same text in all lines, before the highlighted area
+J		2  join the highlighted lines
+K		   run 'keywordprg' on the highlighted area
+O		   Move horizontally to other corner of area.
+Q		   does not start Ex mode
+R		2  delete the highlighted lines and start insert
+S		2  delete the highlighted lines and start insert
+U		2  make highlighted area uppercase
+V		   make Visual mode linewise or stop Visual mode
+X		2  delete the highlighted lines
+Y		   yank the highlighted lines
+a"		   extend highlighted area with a double quoted string
+a'		   extend highlighted area with a single quoted string
+a(		   same as ab
+a)		   same as ab
+a<		   extend highlighted area with a <> block
+a>		   same as a<
+aB		   extend highlighted area with a {} block
+aW		   extend highlighted area with "a WORD"
+a[		   extend highlighted area with a [] block
+a]		   same as a[
+a`		   extend highlighted area with a backtick quoted string
+ab		   extend highlighted area with a () block
+ap		   extend highlighted area with a paragraph
+as		   extend highlighted area with a sentence
+at		   extend highlighted area with a tag block
+aw		   extend highlighted area with "a word"
+a{		   same as aB
+a}		   same as aB
+c		2  delete highlighted area and start insert
+d		2  delete highlighted area
+g CTRL-A	2  add N to number in highlighted text
+g CTRL-X	2  subtract N from number in highlighted text
+gJ		2  join the highlighted lines without inserting spaces
+gq		2  format the highlighted lines
+gv		   exchange current and previous highlighted area
+i"		   extend highlighted area with a double quoted string (without quotes)
+i'		   extend highlighted area with a single quoted string (without quotes)
+i(		   same as ib
+i)		   same as ib
+i<		   extend highlighted area with inner <> block
+i>		   same as i<
+iB		   extend highlighted area with inner {} block
+iW		   extend highlighted area with "inner WORD"
+i[		   extend highlighted area with inner [] block
+i]		   same as i[
+i`		   extend highlighted area with a backtick quoted string (without the backticks)
+ib		   extend highlighted area with inner () block
+ip		   extend highlighted area with inner paragraph
+is		   extend highlighted area with inner sentence
+it		   extend highlighted area with inner tag block
+iw		   extend highlighted area with "inner word"
+i{		   same as iB
+i}		   same as iB
+o		   move cursor to other corner of area
+r		2  replace highlighted area with a character
+s		2  delete highlighted area and start insert
+u		2  make highlighted area lowercase
+v		   make Visual mode characterwise or stop Visual mode
+x		2  delete the highlighted area
+y		   yank the highlighted area
+~		2  swap case for the highlighted area
