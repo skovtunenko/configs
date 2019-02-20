@@ -1,6 +1,8 @@
-set scrolloff=5
+"  Sergio Kovtunenko v0.1
 
+" =================================================================================
 " Russian keymaps:
+" =================================================================================
 map й q
 map ц w
 map у e
@@ -67,8 +69,15 @@ map Ь M
 map Б <
 map Ю >
 map Ё /|
+
+" =================================================================================
+" General settings :
+" =================================================================================
+
+set scrolloff=5
 set iminsert=0
 set imsearch=0
+
 highlight lCursor guifg=NONE guibg=Cyan
 
 " Enable plugin emulations inside IDEA:
@@ -79,6 +88,10 @@ set incsearch
 " set number relativenumber
 
 let mapleader = " "
+
+" =================================================================================
+" General key mappings 
+" =================================================================================
 
 " Insert line above.
 nnoremap [<space> O<esc>0C<esc>j
@@ -92,6 +105,10 @@ nnoremap <space>] a<space><esc>h
 nnoremap [m :action MethodUp<cr>
 " Next method.
 nnoremap ]m :action MethodDown<cr>
+
+" =================================================================================
+" Leader IDEA-specific mappings 
+" =================================================================================
 
 map <leader>a :action $SelectAll<CR>
 map <leader>b :action GotoDeclaration<CR>
