@@ -117,11 +117,10 @@ noremap <leader>yy "*Y
 noremap <leader>p "*p
 noremap <leader>P "*P
 
-nnoremap <tab> <c-w>w
-
 " Make the Y behave similar to D and C
 noremap Y y$
 
+" Navigation for search results
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap gd gdzz
@@ -155,6 +154,7 @@ nnoremap <C-k> <C-w>k
 " nnoremap <a-l> gt
 nnoremap <C-S-tab> gT
 nnoremap <C-tab> gt
+nnoremap <tab> <c-w>w
 
 " =================================================================================
 " Leader IDEA-specific mappings 
@@ -180,10 +180,26 @@ xnoremap <C-S-i> :action ImplementMethods<CR>
 " noremap <C-S-j> :action NextIdentifierReloaded<CR>
 " noremap <C-S-k> :action PreviousIdentifierReloaded<CR>
 
+
+" code navigation
+" nnoremap <leader>] :action GotoImplementation<cr>
+" nnoremap <leader>[ :action GotoSuperMethod<cr>
+" nnoremap <leader>u :action FindUsages<cr>
+" nnoremap <leader>gt :action GotoTest<cr>
+" nnoremap <leader>k :action HighlightUsagesInFile<cr>
+
+
 " Previous method.
 nnoremap [m :action MethodUp<cr>
 " Next method.
 nnoremap ]m :action MethodDown<cr>
+" nnoremap [d :action QuickImplementations<cr>
+" nnoremap ]d :action QuickImplementations<cr>
+" nnoremap [q :action PreviousOccurence<cr>
+" nnoremap ]q :action NextOccurence<cr>
+" nnoremap [c :action VcsShowPrevChangeMarker<cr>
+" nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
 
 " Mnemonic: 'to'
 " nnoremap td :action GotoTypeDeclaration<CR>zt
@@ -214,7 +230,7 @@ nmap <leader><leader> :action AceAction<CR>
 " ???nnoremap ; :action AceJumpAction<CR>
 
 " code refactoring
-nnoremap <space>rr :action RenameElement<cr>
+nnoremap <leader>rr :action RenameElement<cr>
 nmap RR :action Refactorings.QuickListPopupAction<CR>
 
 noremap <leader>h :action TypeHierarchy<CR>
@@ -255,11 +271,11 @@ map <leader>x :action $Cut<CR>
 map <leader>y :action EditorDeleteLine<CR>
 
 
-" nnoremap <Space>o :action GotoClass<CR>
-" nnoremap <Space>O :action GotoFile<CR>
-" nnoremap <Space>d :action CloseContent<CR>
-" nnoremap <Space>j :action RecentFiles<CR>
-" nnoremap <Space>k :action FileStructurePopup<CR>
+" nnoremap <leader>o :action GotoClass<CR>
+" nnoremap <leader>O :action GotoFile<CR>
+" nnoremap <leader>d :action CloseContent<CR>
+" nnoremap <leader>j :action RecentFiles<CR>
+" nnoremap <leader>k :action FileStructurePopup<CR>
 
 
 " nnoremap <leader>ff :action FindInPath<cr>
@@ -282,23 +298,8 @@ map <leader>y :action EditorDeleteLine<CR>
 " nnoremap <leader>gr :action GotoRelated<cr>
 " nnoremap <leader>gb :action Annotate<cr>
 
-nnoremap [d :action QuickImplementations<cr>
-nnoremap ]d :action QuickImplementations<cr>
-
-" code navigation
-" nnoremap <space>] :action GotoImplementation<cr>
-" nnoremap <space>[ :action GotoSuperMethod<cr>
-" nnoremap <space>u :action FindUsages<cr>
-" nnoremap <space>gt :action GotoTest<cr>
-" nnoremap <space>k :action HighlightUsagesInFile<cr>
-
 "map <leader>[ :action EditorCodeBlockStart<CR>
 "map <leader>] :action EditorCodeBlockEnd<CR>
-
-" nnoremap [q :action PreviousOccurence<cr>
-" nnoremap ]q :action NextOccurence<cr>
-" nnoremap [c :action VcsShowPrevChangeMarker<cr>
-" nnoremap ]c :action VcsShowNextChangeMarker<cr>
 
 " nnoremap <leader>. :action VimFilePrevious<cr>
 " nmap <leader>cc :action CommentByLineComment<CR>
@@ -307,14 +308,14 @@ nnoremap ]d :action QuickImplementations<cr>
 " nmap <leader>q :action CloseContent<CR>
 
 "        Shimanski:
-" noremap <Space>b :action Switcher<CR>
-" noremap <Space>r :action RecentFiles<CR>
-" noremap <Space>d :action RecentChangedFiles<CR>
-" noremap <Space>c :action GotoClass<CR>
-" noremap <Space>f :action GotoFile<CR>
-" noremap <Space>g :action FindInPath<CR>
-" noremap <Space>s :action GotoSymbol<CR>
-" noremap <Space>lp :action ManageRecentProjects<CR>
+" noremap <leader>b :action Switcher<CR>
+" noremap <leader>r :action RecentFiles<CR>
+" noremap <leader>d :action RecentChangedFiles<CR>
+" noremap <leader>c :action GotoClass<CR>
+" noremap <leader>f :action GotoFile<CR>
+" noremap <leader>g :action FindInPath<CR>
+" noremap <leader>s :action GotoSymbol<CR>
+" noremap <leader>lp :action ManageRecentProjects<CR>
 noremap \t :action ChooseDebugConfiguration<CR>
 noremap \d :action ChooseDebugConfiguration<CR>
 noremap \r :action ChooseRunConfiguration<CR>
