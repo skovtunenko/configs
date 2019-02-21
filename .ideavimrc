@@ -75,6 +75,23 @@ map Ё /|
 " =================================================================================
 
 set scrolloff=5
+set laststatus=2
+
+" searches wrap around the end of the file
+set wrapscan 
+
+" print the line number in front of each line + show the line number relative to the line with
+set number relativenumber
+" message on status line to show current mode
+set showcmd showmode
+set hlsearch incsearch
+" ignore case in search patterns + no ignore case when pattern has uppercase
+set smartcase ignorecase
+
+" maximum number of changes that can be undone
+set undolevels=100
+set mps+=<:>
+
 set iminsert=0
 set imsearch=0
 
@@ -84,32 +101,135 @@ highlight lCursor guifg=NONE guibg=Cyan
 set surround
 set multiple-cursors
 
-set incsearch
-" set number relativenumber
-
 let mapleader = " "
 
 " =================================================================================
 " General key mappings 
 " =================================================================================
 
-" Insert line above.
-nnoremap [<space> O<esc>0C<esc>j
-" Insert line below.
-nnoremap ]<space> o<esc>0C<esc>k
-" Insert space before in normal mode.
-nnoremap <space>[ i<space><esc>l
-" Insert space after in normal mode.
-nnoremap <space>] a<space><esc>h
-" Previous method.
-nnoremap [m :action MethodUp<cr>
-" Next method.
-nnoremap ]m :action MethodDown<cr>
+" clear the search buffer when hitting return
+nmap <leader>/ :nohlsearch<CR>
+nnoremap <leader><cr> :nohlsearch<cr>
+
+" easy system clipboard copy/paste
+noremap <leader>y "*y
+noremap <leader>yy "*Y
+noremap <leader>p "*p
+noremap <leader>P "*P
+
+nnoremap <tab> <c-w>w
+
+" Make the Y behave similar to D and C
+noremap Y y$
+
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap gd gdzz
+
+" Select all text
+nnoremap vv ggVG
+
+" Moving blocks of text in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Insert line above
+nnoremap [<leader> O<esc>0C<esc>j
+" Insert line below
+nnoremap ]<leader> o<esc>0C<esc>k
+" Insert space before in normal mode
+nnoremap <leader>[ i<space><esc>l
+" Insert space after in normal mode
+nnoremap <leader>] a<space><esc>h
+
+" Edit and reload ideavim config
+nnoremap <leader>ev :e ~/.ideavimrc<CR>
+nnoremap <leader>sv :source ~/.ideavimrc<CR>
+
+" easy window navigation
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>k
+" nnoremap <a-h> gT
+" nnoremap <a-l> gt
+nnoremap <C-S-tab> gT
+nnoremap <C-tab> gt
 
 " =================================================================================
 " Leader IDEA-specific mappings 
 " =================================================================================
 
+" built in search looks better
+nnoremap / :action Find<cr>
+" nnoremap n :action FindNext<CR>
+" nnoremap N :action FindPrevious<CR>
+" but preserve ideavim search
+nnoremap g/ /
+
+" built-in navigation to navigated items works better
+noremap <C-o> :action Back<CR>
+noremap <C-i> :action Forward<CR>
+" but preserve ideavim defaults
+nnoremap g<C-o> <C-o>
+nnoremap g<C-i> <C-i>
+
+xnoremap <C-S-o> :action OverrideMethods<CR>
+xnoremap <C-S-i> :action ImplementMethods<CR>
+" Identifier Highlighter Reloaded plugin mapping
+" noremap <C-S-j> :action NextIdentifierReloaded<CR>
+" noremap <C-S-k> :action PreviousIdentifierReloaded<CR>
+
+" Previous method.
+nnoremap [m :action MethodUp<cr>
+" Next method.
+nnoremap ]m :action MethodDown<cr>
+
+" Mnemonic: 'to'
+" nnoremap td :action GotoTypeDeclaration<CR>zt
+" nnoremap ti :action GotoImplementation<CR>zt
+" nnoremap ts :action GotoSuperMethod<CR>zt
+" nnoremap tt :action GotoTest<CR>zt
+" nnoremap tu :action ShowUsages<CR>
+" to 'class'
+" nnoremap tc gg<BAR>:action MethodDown<CR>zt
+
+" Mnemonic 'introduce'
+" noremap <leader>ic :action IntroduceConstant<CR>
+" noremap <leader>if :action IntroduceField<CR>
+" noremap <leader>ip :action IntroduceParameter<CR>
+" noremap <leader>iv :action IntroduceVariable<CR>
+
+" Git
+" noremap <leader>gb :action Annotate<CR>
+" noremap <leader>gl :action Vcs.Show.Log<CR>
+" noremap <leader>gg :action Vcs.QuickListPopupAction<CR>
+
+noremap <leader>f :action ReformatCode<CR>:action OptimizeImports<CR>:action AutoIndentLines<CR>
+noremap <leader>G :action Generate<CR>
+vnoremap <leader>s :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action SurroundWithLiveTemplate<CR>
+
+" EasyMotion (AceJump plugin)
+nmap <leader><leader> :action AceAction<CR>
+" ???nnoremap ; :action AceJumpAction<CR>
+
+" code refactoring
+nnoremap <space>rr :action RenameElement<cr>
+nmap RR :action Refactorings.QuickListPopupAction<CR>
+
+noremap <leader>h :action TypeHierarchy<CR>
+" noremap <leader>h :action HighlightUsagesInFile<CR>
+
+noremap <leader>N :action NewElement<CR>
+
+" Mnemonic 'extract'
+nnoremap <leader>em :action ExtractMethod<CR>
+vnoremap <leader>em :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action ExtractMethod<CR>
+noremap <leader>ec :action ExtractClass<CR>
+
+nnoremap <leader>m :action FileStructurePopup<CR>
+noremap <leader>u :action FindUsages<CR>
+noremap <leader>w :action SelectIn<CR>
 map <leader>a :action $SelectAll<CR>
 map <leader>b :action GotoDeclaration<CR>
 map <leader>c :action $Copy<CR>
@@ -123,7 +243,7 @@ map <leader>m :action EditorScrollToCenter<CR>
 map <leader>n :action FileChooser.NewFolder<CR>
 map <leader>o :action OverrideMethods<CR>
 map <leader>p :action ParameterInfo<CR>
-map <leader>q :action GuiDesigner.QuickJavadoc<CR>
+nnoremap <leader>e :action QuickJavaDoc<CR>
 map <leader>r :action Replace<CR>
 map <leader>s :action SaveAll<CR>
 map <leader>t :action Vcs.UpdateProject<CR>
@@ -133,5 +253,73 @@ map <leader>v :action VimVisualToggleBlockMode<CR>
 map <leader>w :action EditorSelectWord<CR>
 map <leader>x :action $Cut<CR>
 map <leader>y :action EditorDeleteLine<CR>
+
+
+" nnoremap <Space>o :action GotoClass<CR>
+" nnoremap <Space>O :action GotoFile<CR>
+" nnoremap <Space>d :action CloseContent<CR>
+" nnoremap <Space>j :action RecentFiles<CR>
+" nnoremap <Space>k :action FileStructurePopup<CR>
+
+
+" nnoremap <leader>ff :action FindInPath<cr>
+" nnoremap <leader>fu :action FindUsages<cr>
+" nnoremap <leader>su :action ShowUsages<cr>
+" nnoremap <leader>cv :action ChangeView<cr>
+" nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
+" nnoremap <leader>br :action ViewBreakpoints<cr>
+" nnoremap <leader>oi :action OptimizeImports<cr>
+" nnoremap <leader>re :action RenameElement<cr>
+" nnoremap <leader>rf :action RenameFile<cr>
+" nnoremap <leader>gq :action ReformatCode<cr>
+" nnoremap <leader>mv :action ActivateMavenProjectsToolWindow<cr>
+" nnoremap <leader>dc :action ChooseDebugConfiguration<cr>
+" nnoremap <leader>rc :action ChooseRunConfiguration<cr>
+" nnoremap <leader>gi :action GotoImplementation<cr>
+" nnoremap <leader>gs :action GotoSuperMethod<cr>
+" nnoremap <leader>gd :action GotoDeclaration<cr>
+" nnoremap <leader>gt :action GotoTest<cr>
+" nnoremap <leader>gr :action GotoRelated<cr>
+" nnoremap <leader>gb :action Annotate<cr>
+
+nnoremap [d :action QuickImplementations<cr>
+nnoremap ]d :action QuickImplementations<cr>
+
+" code navigation
+" nnoremap <space>] :action GotoImplementation<cr>
+" nnoremap <space>[ :action GotoSuperMethod<cr>
+" nnoremap <space>u :action FindUsages<cr>
+" nnoremap <space>gt :action GotoTest<cr>
+" nnoremap <space>k :action HighlightUsagesInFile<cr>
+
 "map <leader>[ :action EditorCodeBlockStart<CR>
 "map <leader>] :action EditorCodeBlockEnd<CR>
+
+" nnoremap [q :action PreviousOccurence<cr>
+" nnoremap ]q :action NextOccurence<cr>
+" nnoremap [c :action VcsShowPrevChangeMarker<cr>
+" nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+" nnoremap <leader>. :action VimFilePrevious<cr>
+" nmap <leader>cc :action CommentByLineComment<CR>
+" nmap <leader>rff :action ReformatCode<CR>
+" nmap <leader>, :action AceJumpAction<CR>
+" nmap <leader>q :action CloseContent<CR>
+
+"        Shimanski:
+" noremap <Space>b :action Switcher<CR>
+" noremap <Space>r :action RecentFiles<CR>
+" noremap <Space>d :action RecentChangedFiles<CR>
+" noremap <Space>c :action GotoClass<CR>
+" noremap <Space>f :action GotoFile<CR>
+" noremap <Space>g :action FindInPath<CR>
+" noremap <Space>s :action GotoSymbol<CR>
+" noremap <Space>lp :action ManageRecentProjects<CR>
+noremap \t :action ChooseDebugConfiguration<CR>
+noremap \d :action ChooseDebugConfiguration<CR>
+noremap \r :action ChooseRunConfiguration<CR>
+" nnoremap \r :action RunClass<cr>
+" nnoremap \R :action Run<cr>
+" nnoremap \d :action DebugClass<cr>
+" nnoremap \D :action Debug<cr>
+" nnoremap \c :action CheckStyleCurrentFileAction<cr>
