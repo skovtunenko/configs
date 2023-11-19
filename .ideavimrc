@@ -68,6 +68,7 @@
     map Б <
     map Ю >
     map Ё /|
+
 " }
 
 
@@ -165,7 +166,7 @@
 " General key mappings {
 
     " Don't use Ex mode, use Q for formatting.
-    " map Q gq " I don't know what's that :(
+    map Q gq " I don't know what's that :(
 
     " clear the search buffer when hitting return
     nnoremap <leader>/ :nohlsearch<CR>
@@ -197,10 +198,10 @@
     vnoremap > >gv
 
     " easy window navigation (in split-window mode):
-    nnoremap <C-l> <C-w>l
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-k> <C-w>k
+    nnoremap <C-S-l> <C-w>l
+    nnoremap <C-S-j> <C-w>j
+    nnoremap <C-S-h> <C-w>h
+    nnoremap <C-S-k> <C-w>k
     " nnoremap <a-h> gT
     " nnoremap <a-l> gt
     nnoremap <C-S-tab> gT
@@ -244,13 +245,13 @@
     nnoremap <leader>j :action GotoImplementation<CR>zt
     nnoremap <leader>k :action GotoSuperMethod<CR>zt
     nnoremap <leader>gt :action GotoTest<cr>zt
-    " nnoremap <leader>gk :action HighlightUsagesInFile<cr>
 
     " Navigation / Quick Info (extracted from my config) {
 
         nnoremap <leader>W :action ParameterInfo<CR>
         nnoremap <leader>w :action QuickImplementations<CR>
         nnoremap <leader>q :action QuickJavaDoc<CR>
+        nnoremap <leader>Q :action ShowHoverInfo<CR>
 
         nnoremap <leader>m :action FileStructurePopup<CR>
         nnoremap <leader>E :action RecentFiles<CR>
@@ -259,28 +260,34 @@
         nnoremap <leader>O :action GotoFile<CR>
         nnoremap <leader><C-o> :action GotoSymbol<CR>
 
+        " !!! "Identifier Highlighter Reloaded" plugin mapping (plugin must be installed!)
+        noremap <C-.> :action NextIdentifierReloaded<CR>zt
+        noremap <C-,> :action PreviousIdentifierReloaded<CR>zt
+
+        " !!! Previous/next methods:                                                                            OK
+        nnoremap <C-j> :action MethodDown<CR>zt
+        nnoremap <C-k> :action MethodUp<CR>zt
+        nnoremap [m :action MethodUp<cr>zt
+        nnoremap ]m :action MethodDown<cr>zt
+        " nnoremap [q :action PreviousOccurence<cr>
+        " nnoremap ]q :action NextOccurence<cr>
+        " nnoremap [c :action VcsShowPrevChangeMarker<cr>
+        " nnoremap ]c :action VcsShowNextChangeMarker<cr>
+        nnoremap <C-h> :action EditorCodeBlockStart<CR>zt
+        nnoremap <C-l> :action EditorCodeBlockEnd<CR>zz
+        noremap <leader>[ :action EditorCodeBlockStart<CR>zt
+        noremap <leader>] :action EditorCodeBlockEnd<CR>zz
+
     " }
 
     " Commenting (extracted from my config)
     " nnoremap <leader> :action CommentByBlockComment<CR> " shift+meta+divide ????
-    " nnoremap <leader> :action CommentByLineComment<CR> " meta+slash ????
+    " nnoremap <leader>\ :action CommentByLineComment<CR> " meta+slash ????
 
     xnoremap <C-S-o> :action OverrideMethods<CR>
     xnoremap <C-S-i> :action ImplementMethods<CR>
 
-    " !!! "Identifier Highlighter Reloaded" plugin mapping (plugin must be installed!)
-    noremap <C-.> :action NextIdentifierReloaded<CR>zt
-    noremap <C-,> :action PreviousIdentifierReloaded<CR>zt
 
-    " !!! Previous/next methods:                                                                            OK
-    nnoremap [m :action MethodUp<cr>zt
-    nnoremap ]m :action MethodDown<cr>zt
-    " nnoremap [q :action PreviousOccurence<cr>
-    " nnoremap ]q :action NextOccurence<cr>
-    " nnoremap [c :action VcsShowPrevChangeMarker<cr>
-    " nnoremap ]c :action VcsShowNextChangeMarker<cr>
-    noremap <leader>[ :action EditorCodeBlockStart<CR>zt
-    noremap <leader>] :action EditorCodeBlockEnd<CR>zt
 
     " Refactoring Commands: {
 
@@ -317,7 +324,7 @@
 
         " Compare (extracted from my config)   keep in mind that <leader>d conflicts with cut into system buffer, but works fine!
         nnoremap <leader>d :action Compare.SameVersion<CR>
-        nnoremap <leader>D :action CompareClipboardWithSelection<CR>
+        noremap <leader>D :action CompareClipboardWithSelection<CR>
 
         nnoremap <leader>T :action Vcs.UpdateProject<CR>
         nnoremap <leader>K :action Git.Stash<CR>
@@ -338,3 +345,55 @@
     " nnoremap <leader><leader> :action AceAction<CR>
 
 " }
+
+" Set handlers to avoid clashes with IDE {
+
+    sethandler <C-,> a:vim
+    sethandler <C-.> a:vim
+    sethandler <C-D> a:vim
+    sethandler <C-F> a:vim
+    sethandler <C-I> a:vim
+    sethandler <C-L> a:vim
+    sethandler <C-M> a:vim
+    sethandler <C-O> a:vim
+    sethandler <C-P> a:vim
+    sethandler <C-R> a:vim
+    sethandler <C-S> a:vim
+    sethandler <C-T> a:vim
+    sethandler <C-W> a:vim
+    sethandler <C-Tab> a:vim
+    sethandler <C-S-Tab> a:vim
+    sethandler <C-S-2> a:vim
+    sethandler <C-S-6> a:vim
+    sethandler <C-B> a:vim
+    sethandler <C-C> a:vim
+    sethandler <C-E> a:vim
+    sethandler <C-G> a:vim
+    sethandler <C-H> a:vim
+    sethandler <C-J> a:vim
+    sethandler <C-K> a:vim
+    sethandler <C-N> a:vim
+    sethandler <C-S-O> a:vim
+    sethandler <C-Q> a:vim
+    sethandler <C-U> a:vim
+    sethandler <C-Y> a:vim
+    sethandler <C-[> a:vim
+    sethandler <C-\> a:vim
+    sethandler <C-]> a:vim
+
+    sethandler <C-1> a:ide
+    sethandler <C-2> a:ide
+    sethandler <C-3> a:ide
+    sethandler <C-4> a:ide
+    sethandler <C-5> a:ide
+    sethandler <C-6> a:ide
+    sethandler <C-7> a:ide
+    sethandler <C-8> a:ide
+    sethandler <C-9> a:ide
+    sethandler <C-0> a:ide
+    sethandler <C-C> a:ide
+    sethandler <C-V> a:ide
+    sethandler <C-X> a:ide
+    sethandler <C-A> a:ide
+
+"}
