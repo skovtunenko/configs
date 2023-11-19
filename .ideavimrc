@@ -222,8 +222,6 @@
     " built in search looks better
     nnoremap / :action Find<CR> " just to execute Idea search
     xnoremap / :action Find<CR> " to preserve selection
-    " nnoremap n :action FindNext<CR>
-    " nnoremap N :action FindPrevious<CR>
     " but preserve ideavim search
     nnoremap g/ /
 
@@ -237,10 +235,11 @@
     " !!! Hierarchies (extracted from my config)                                                             OK
     nnoremap <leader>c :action CallHierarchy<CR>
     nnoremap <leader>C :action TypeHierarchy<CR>
-    nnoremap <leader>z :action MethodHierarchy<CR>
+    nnoremap <leader><C-c> :action MethodHierarchy<CR>
 
     " !!! Navigation (extracted from my config)                                                              OK
     nnoremap <leader>a :action ShowUsages<CR>
+    nnoremap <leader>A :action FindUsages<CR>
     nnoremap <leader>s :action FindUsages<CR>
     nnoremap <leader>j :action GotoImplementation<CR>zt
     nnoremap <leader>k :action GotoSuperMethod<CR>zt
@@ -285,6 +284,8 @@
 
     " Refactoring Commands: {
 
+        noremap <leader>G :action Generate<CR>
+
         nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
         nnoremap <leader>R :action RenameElement<cr>
         noremap <leader>N :action NewElement<CR>
@@ -317,8 +318,8 @@
         " Compare (extracted from my config)   keep in mind that <leader>d conflicts with cut into system buffer, but works fine!
         nnoremap <leader>d :action Compare.SameVersion<CR>
         nnoremap <leader>D :action CompareClipboardWithSelection<CR>
-        nnoremap <leader>v :action CompareFileWithEditor<CR>
 
+        nnoremap <leader>T :action Vcs.UpdateProject<CR>
         nnoremap <leader>K :action Git.Stash<CR>
         nnoremap <leader>L :action Git.Unstash<CR>
         nnoremap <leader>J :action Vcs.QuickListPopupAction<CR>
@@ -328,29 +329,12 @@
 
         " Git random junk:
         " noremap <leader>gl :action Vcs.Show.Log<CR>
-        " noremap <leader>gg :action Vcs.QuickListPopupAction<CR>
 
     " }
 
-    " noremap <leader>G :action Generate<CR>
-    " vnoremap <leader>s :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action SurroundWithLiveTemplate<CR>
+    " vnoremap <leader>t :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action SurroundWithLiveTemplate<CR>
 
     " EasyMotion (AceJump plugin) -- enable the plugin in the config
     " nnoremap <leader><leader> :action AceAction<CR>
-
-" }
-
-
-
-" Experimental things stolen from other configs - disabled {
-
-    " nnoremap <leader>a :action $SelectAll<CR>
-    " nnoremap <leader>b :action GotoDeclaration<CR>
-
-    " nnoremap <leader>t :action Vcs.UpdateProject<CR>
-    " nnoremap <leader>k :action Vcs.QuickListPopupAction<CR>
-    " nnoremap <leader>v :action VimVisualToggleBlockMode<CR>
-
-    " nnoremap <leader>. :action VimFilePrevious<cr>
 
 " }
