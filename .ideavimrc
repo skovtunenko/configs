@@ -80,7 +80,7 @@
     set laststatus=2
 
     " When included, Vim will use the clipboard register '*' for all yank, delete, change and put operations:
-    " before it was: unnamed
+    " before in my config it was: unnamed
     set clipboard+=ideaput
 
     set idearefactormode=keep
@@ -101,10 +101,13 @@
     " message on status line to show current mode
     set showcmd showmode
     set hlsearch incsearch
+
     " ignore case in search patterns + no ignore case when pattern has uppercase
     set smartcase ignorecase
+
     " IdeaVim ONLY flag to perform a join via the IDE
     set ideajoin
+
     " Defines keywords for commands like 'w', '*', etc
     set iskeyword
 
@@ -122,12 +125,15 @@
 
 " Enable plugin emulations inside IDEA (https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins) {
 
-    set dialogescape=off " legacy | on | off https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4264908.0-0
-    set nooneline=off " https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4264908.0-0
+    " Possible values: legacy | on | off https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4264908.0-0
+    set dialogescape=off
+    " https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4264908.0-0
+    set nooneline=off
 
     set surround
 
-    Plug 'machakann/vim-highlightedyank' " Description: https://github.com/machakann/vim-highlightedyank/blob/master/doc/highlightedyank.txt
+    " Description: https://github.com/machakann/vim-highlightedyank/blob/master/doc/highlightedyank.txt :
+    Plug 'machakann/vim-highlightedyank'
     set highlightedyank
     " let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
     let g:highlightedyank_highlight_duration = "1000"
@@ -139,41 +145,50 @@
 
     set commentary
 
-    " set easymotion " required additional plugin installation `EasyMotion`
+    " required additional plugin installation `EasyMotion`
+    " set easymotion
     " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
-    " let g:EasyMotion_override_acejump = 0 " DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users
+    " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
+    " let g:EasyMotion_override_acejump = 0
 
-    set keep-english-in-normal-and-restore-in-insert " required additional plugin 'IdeaVimExtension' to be installed
+    " required additional plugin 'IdeaVimExtension' to be installed
+    set keep-english-in-normal-and-restore-in-insert
 
-    set sneak " For this plugin `IdeaVim-Sneak` (additional installation required):
-              " Use `s` plus two characters to search forward in document;
-              " Use `S` plus two characters to search backward in document;
-              " Use `;` and `,` just as with `f` and `F` commands to repeat searches;
+    " For this plugin `IdeaVim-Sneak` (additional installation required):
+    " Use `s` plus two characters to search forward in document;
+    " Use `S` plus two characters to search backward in document;
+    " Use `;` and `,` just as with `f` and `F` commands to repeat searches;
+    set sneak
 
+    " required additional plugin 'IdeaVim-Quickscope' to be installed
     " If you are using ideavim-sneak please ensure set quickscope is placed after set sneak:
-    set quickscope " required additional plugin 'IdeaVim-Quickscope' to be installed
+    set quickscope
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
     let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    let g:qs_primary_color = '#ff0000' " to configure the first occurrence character color. Please use a hex color.
-    let g:qs_secondary_color = '#ff00ff' " to configure the second occurrence character color. Again, please use a hex color.
+    " to configure the first occurrence character color. Please use a hex color:
+    let g:qs_primary_color = '#ff0000'
+    " to configure the second occurrence character color. Again, please use a hex color:
+    let g:qs_secondary_color = '#ff00ff'
 
-    " set which-key " required additional plugin 'Which-Key' to be installed
-    set notimeout " suggestion for `Which-key` plugin to disable the timeout option
+    " required additional plugin 'Which-Key' to be installed
+    " set which-key
+    " suggestion for `Which-key` plugin to disable the timeout option :
+    set notimeout
 
 " }
 
 
 " General key mappings {
 
-    " Don't use Ex mode, use Q for formatting.
-    map Q gq " I don't know what's that :(
+    " Don't use Ex mode, use Q for formatting:
+    map Q gq
 
-    " clear the search buffer when hitting return
+    " clear the search buffer when hitting return:
     nnoremap <leader>/ :nohlsearch<CR>
     nnoremap <leader><cr> :nohlsearch<cr>
     nnoremap <silent> <leader><space> :noh<cr>
 
-    " easy system clipboard copy/paste integration (changed from "+ to "* in version 2.5.0)
+    " easy system clipboard copy/paste integration (changed from "+ to "* in version 2.5.0):
     vmap <leader>y "*y
     vmap <leader>d "*d
     nmap <leader>y "*yy
@@ -182,10 +197,10 @@
     vmap <leader>p "*p
     vmap <leader>P "*P
 
-    " Make the Y behave similar to D and C
+    " Make the Y behave similar to D and C:
     noremap Y y$
 
-    " Navigation for search results
+    " Navigation for search results:
     nnoremap n nzz
     nnoremap N Nzz
     nnoremap gd gdzz
@@ -193,7 +208,7 @@
     " Select all text
     nnoremap vv ggVG
 
-    " Moving blocks of text in visual mode
+    " Moving blocks of text in visual mode:
     vnoremap < <gv
     vnoremap > >gv
 
@@ -220,33 +235,32 @@
 
     " }
 
-    " built in search looks better
-    nnoremap / :action Find<CR> " just to execute Idea search
-    xnoremap / :action Find<CR> " to preserve selection
-    " but preserve ideavim search
+    " built in search looks better:
+    nnoremap / :action Find<CR>
+    xnoremap / :action Find<CR>
+    " but preserve ideavim search:
     nnoremap g/ /
 
-    " built-in navigation to navigated items works better                                                    OK
+    " built-in navigation to navigated items works better
     noremap <C-o> :action Back<CR>zt
     noremap <C-i> :action Forward<CR>zt
     " but preserve ideavim defaults
     nnoremap g<C-o> <C-o>
     nnoremap g<C-i> <C-i>
 
-    " !!! Hierarchies (extracted from my config)                                                             OK
-    nnoremap <leader>c :action CallHierarchy<CR>
-    nnoremap <leader>C :action TypeHierarchy<CR>
-    nnoremap <leader><C-c> :action MethodHierarchy<CR>
-
-    " !!! Navigation (extracted from my config)                                                              OK
-    nnoremap <leader>a :action ShowUsages<CR>
-    nnoremap <leader>A :action FindUsages<CR>
-    nnoremap <leader>s :action FindUsages<CR>
-    nnoremap <leader>j :action GotoImplementation<CR>zt
-    nnoremap <leader>k :action GotoSuperMethod<CR>zt
-    nnoremap <leader>gt :action GotoTest<cr>zt
-
     " Navigation / Quick Info (extracted from my config) {
+
+        nnoremap <leader>c :action CallHierarchy<CR>
+        nnoremap <leader>C :action TypeHierarchy<CR>
+        nnoremap <leader><C-c> :action MethodHierarchy<CR>
+
+        nnoremap <leader>a :action ShowUsages<CR>
+        nnoremap <leader>A :action FindUsages<CR>
+        nnoremap <leader>s :action FindUsages<CR>
+
+        nnoremap <leader>j :action GotoImplementation<CR>zt
+        nnoremap <leader>k :action GotoSuperMethod<CR>zt
+        nnoremap <leader>gt :action GotoTest<cr>zt
 
         nnoremap <leader>W :action ParameterInfo<CR>
         nnoremap <leader>w :action QuickImplementations<CR>
@@ -264,7 +278,7 @@
         noremap <C-.> :action NextIdentifierReloaded<CR>zt
         noremap <C-,> :action PreviousIdentifierReloaded<CR>zt
 
-        " !!! Previous/next methods:                                                                            OK
+        " !!! Previous/next methods:
         nnoremap <C-j> :action MethodDown<CR>zt
         nnoremap <C-k> :action MethodUp<CR>zt
         nnoremap [m :action MethodUp<cr>zt
@@ -281,12 +295,11 @@
     " }
 
     " Commenting (extracted from my config)
-    " nnoremap <leader> :action CommentByBlockComment<CR> " shift+meta+divide ????
-    " nnoremap <leader>\ :action CommentByLineComment<CR> " meta+slash ????
+    " nnoremap <leader> :action CommentByBlockComment<CR>
+    " nnoremap <leader>\ :action CommentByLineComment<CR>
 
     xnoremap <C-S-o> :action OverrideMethods<CR>
     xnoremap <C-S-i> :action ImplementMethods<CR>
-
 
 
     " Refactoring Commands: {
@@ -309,6 +322,7 @@
 
     " Debugging/Run {
 
+        " Breakpoints management:
         nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
         nnoremap <leader>br :action ViewBreakpoints<cr>
 
@@ -380,6 +394,9 @@
     sethandler <C-[> a:vim
     sethandler <C-\> a:vim
     sethandler <C-]> a:vim
+    sethandler <C-S-H> a:vim
+    sethandler <C-S-J> a:vim
+    sethandler <C-S-K> a:vim
 
     sethandler <C-1> a:ide
     sethandler <C-2> a:ide
