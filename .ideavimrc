@@ -212,10 +212,6 @@
 
 " Leader IDEA-specific mappings {
 
-    " Edit and reload ideavim config
-    " nnoremap <leader>EV :e ~/.deavimrc<CR>
-    " nnoremap <leader>SV :source ~/.ideavimrc<CR>
-
     " Window management {
 
         nmap <leader>h <action>(PreviousTab)
@@ -224,7 +220,8 @@
     " }
 
     " built in search looks better
-    nnoremap / :action Find<cr>
+    nnoremap / :action Find<CR> " just to execute Idea search
+    xnoremap / :action Find<CR> " to preserve selection
     " nnoremap n :action FindNext<CR>
     " nnoremap N :action FindPrevious<CR>
     " but preserve ideavim search
@@ -250,7 +247,7 @@
     nnoremap <leader>gt :action GotoTest<cr>zt
     " nnoremap <leader>gk :action HighlightUsagesInFile<cr>
 
-    " Quick Info (extracted from my config) {
+    " Navigation / Quick Info (extracted from my config) {
 
         nnoremap <leader>W :action ParameterInfo<CR>
         nnoremap <leader>w :action QuickImplementations<CR>
@@ -258,6 +255,10 @@
 
         nnoremap <leader>m :action FileStructurePopup<CR>
         nnoremap <leader>E :action RecentFiles<CR>
+
+        nnoremap <leader>o :action GotoClass<CR>
+        nnoremap <leader>O :action GotoFile<CR>
+        nnoremap <leader><C-o> :action GotoSymbol<CR>
 
     " }
 
@@ -340,20 +341,15 @@
 " }
 
 
+
 " Experimental things stolen from other configs - disabled {
 
     " nnoremap <leader>a :action $SelectAll<CR>
     " nnoremap <leader>b :action GotoDeclaration<CR>
 
-    " nnoremap <leader>f :action Find<CR>
-    " nnoremap <leader>i :action ImplementMethods<CR>
-    " nnoremap <leader>o :action OverrideMethods<CR>
     " nnoremap <leader>t :action Vcs.UpdateProject<CR>
     " nnoremap <leader>k :action Vcs.QuickListPopupAction<CR>
     " nnoremap <leader>v :action VimVisualToggleBlockMode<CR>
-
-    " nnoremap <leader>o :action GotoClass<CR>
-    " nnoremap <leader>O :action GotoFile<CR>
 
     " nnoremap <leader>. :action VimFilePrevious<cr>
 
