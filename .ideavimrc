@@ -275,8 +275,8 @@
         nnoremap <leader><C-o> :action GotoSymbol<CR>
 
         " !!! "Identifier Highlighter Reloaded" plugin mapping (plugin must be installed!)
-        noremap <C-.> :action NextIdentifierReloaded<CR>zt
-        noremap <C-,> :action PreviousIdentifierReloaded<CR>zt
+        noremap <C-.> :action NextIdentifierReloaded<CR>zz
+        noremap <C-,> :action PreviousIdentifierReloaded<CR>zz
 
         " !!! Previous/next methods:
         nnoremap <C-j> :action MethodDown<CR>zt
@@ -300,7 +300,6 @@
 
     xnoremap <C-S-o> :action OverrideMethods<CR>
     xnoremap <C-S-i> :action ImplementMethods<CR>
-
 
     " Refactoring Commands: {
 
