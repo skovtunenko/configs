@@ -147,7 +147,7 @@
     set commentary
 
     " required additional plugin installation `EasyMotion`
-    " set easymotion
+    Plug 'easymotion/vim-easymotion'
     " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
     " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
     " let g:EasyMotion_override_acejump = 0
@@ -240,6 +240,8 @@
 
 " Leader IDEA-specific mappings {
 
+    nnoremap <leader>s :action SaveAll<CR>
+
     " Window management {
 
         nmap <leader>h <action>(PreviousTab)
@@ -254,6 +256,12 @@
         xnoremap / :action Find<CR>
         " but preserve ideavim search:
         nnoremap g/ /
+
+        nnoremap <leader>f :action FindInPath<CR>
+        xnoremap <leader>f :action FindInPath<CR>
+
+        nnoremap <leader>F :action ReplaceInPath<CR>
+        xnoremap <leader>F :action ReplaceInPath<CR>
 
     " }
 
@@ -279,8 +287,6 @@
         xnoremap <leader>a :action ShowUsages<CR>
         nnoremap <leader>A :action FindUsages<CR>
         xnoremap <leader>A :action FindUsages<CR>
-        nnoremap <leader>s :action FindUsages<CR>
-        xnoremap <leader>s :action FindUsages<CR>
 
         " Go to mnemonic:
         nnoremap <leader>j :action GotoImplementation<CR>zt
@@ -336,6 +342,21 @@
 
     " }
 
+    " IDEA Panels {
+
+        nnoremap <leader>1 :action ActivateProjectToolWindow<CR>
+        nnoremap <leader>2 :action ActivateFindToolWindow<CR>
+        nnoremap <leader>3 :action ActivateStructureToolWindow<CR>
+        nnoremap <leader>4 :action ActivateRunToolWindow<CR>
+        nnoremap <leader>5 :action ActivateDebugToolWindow<CR>
+        nnoremap <leader>6 :action ActivateServicesToolWindow<CR>
+        nnoremap <leader>7 :action ActivateBookmarksToolWindow<CR>
+        nnoremap <leader>8 :action ActivateDatabaseToolWindow<CR>
+        nnoremap <leader>9 :action ActivateGitView<CR>
+        nnoremap <leader>0 :action ActivateTerminalToolWindow<CR>
+
+    " }
+
     " Commenting (extracted from my config)
     " nnoremap <leader> :action CommentByBlockComment<CR>
     " nnoremap <leader>\ :action CommentByLineComment<CR>
@@ -382,6 +403,8 @@
         noremap <leader>D :action CompareClipboardWithSelection<CR>
 
         nnoremap <leader>T :action Vcs.UpdateProject<CR>
+        nnoremap <leader>t :action CheckinProject<CR>
+        nnoremap <leader><C-t> :action Vcs.Push<CR>
         nnoremap <leader>K :action Git.Stash<CR>
         nnoremap <leader>L :action Git.Unstash<CR>
         nnoremap <leader>J :action Vcs.QuickListPopupAction<CR>
@@ -397,7 +420,7 @@
     " vnoremap <leader>t :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action SurroundWithLiveTemplate<CR>
 
     " EasyMotion (AceJump plugin) -- enable the plugin in the config
-    " nnoremap <leader><leader> :action AceAction<CR>
+    nnoremap <leader><leader> :action AceAction<CR>
 
 " }
 
