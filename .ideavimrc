@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.9
-"  date: 21.NOV.2023
+"  Sergio Kovtunenko v0.10
+"  date: 22.NOV.2023
 
 " Russian keymaps {
 
@@ -133,11 +133,15 @@
 
     set surround
 
-    " Description: https://github.com/machakann/vim-highlightedyank/blob/master/doc/highlightedyank.txt :
-    Plug 'machakann/vim-highlightedyank'
-    set highlightedyank
-    " let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
-    let g:highlightedyank_highlight_duration = "1000"
+    " Plugin `Vim highlightedyank` (additional plugin installation required) {
+
+        " Description: https://github.com/machakann/vim-highlightedyank/blob/master/doc/highlightedyank.txt :
+        Plug 'machakann/vim-highlightedyank'
+        set highlightedyank
+        " let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+        let g:highlightedyank_highlight_duration = "1000"
+
+    " }
 
     " vim-paragraph-motion link: https://github.com/dbakker/vim-paragraph-motion#vim-paragraph-motion
     Plug 'dbakker/vim-paragraph-motion'
@@ -146,35 +150,56 @@
 
     set commentary
 
-    " required additional plugin installation `EasyMotion`
-    Plug 'easymotion/vim-easymotion'
-    " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
-    " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
-    " let g:EasyMotion_override_acejump = 0
+    " Plugin `EasyMotion` (additional plugins AceJump and IdeaVim-EasyMotion installation required) {
 
-    " required additional plugin 'IdeaVimExtension' to be installed
-    set keep-english-in-normal-and-restore-in-insert
+        " !! Keep in mind that labels should be typed in lower case !!
+        Plug 'easymotion/vim-easymotion'
+        set easymotion
+        " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
+        " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
+        " let g:EasyMotion_override_acejump = 0
 
-    " For this plugin `IdeaVim-Sneak` (additional installation required):
-    " Use `s` plus two characters to search forward in document;
-    " Use `S` plus two characters to search backward in document;
-    " Use `;` and `,` just as with `f` and `F` commands to repeat searches;
-    set sneak
+    " }
 
-    " required additional plugin 'IdeaVim-Quickscope' to be installed
-    " If you are using ideavim-sneak please ensure set quickscope is placed after set sneak:
-    set quickscope
-    let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-    let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    " to configure the first occurrence character color. Please use a hex color:
-    let g:qs_primary_color = '#ff0000'
-    " to configure the second occurrence character color. Again, please use a hex color:
-    let g:qs_secondary_color = '#ff00ff'
+    " Plugin 'IdeaVimExtension' (required additional plugin to be installed) {
 
-    " required additional plugin 'Which-Key' to be installed
-    " set which-key
-    " suggestion for `Which-key` plugin to disable the timeout option :
-    set notimeout
+        set keep-english-in-normal-and-restore-in-insert
+
+    " }
+
+    " Plugin `IdeaVim-Sneak` (additional installation required) {
+
+        " Use `s` plus two characters to search forward in document;
+        " Use `S` plus two characters to search backward in document;
+        " Use `;` and `,` just as with `f` and `F` commands to repeat searches;
+        set sneak
+
+    " }
+
+    " Plugin 'IdeaVim-Quickscope' (additional installation required): {
+
+        " !! If you are using `ideavim-sneak` please ensure set quickscope is placed after set sneak !!
+        set quickscope
+        let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+        let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        " to configure the first occurrence character color. Please use a hex color:
+        let g:qs_primary_color = '#ff0000'
+        " to configure the second occurrence character color. Again, please use a hex color:
+        let g:qs_secondary_color = '#ff00ff'
+
+    " }
+
+    " 'Which-Key' plugin (required additional plugin 'Which-Key' to be installed) {
+
+        set which-key
+        " suggestion for `Which-key` plugin to disable the timeout option :
+        set notimeout
+        " increase the timeoutlen (default: 1000), don't add space around the equal sign
+        " set timeoutlen=5000
+        " By default Which-Key will only display key mappings which are defined in the .ideavimrc file. If you wish it can also display default VIM actions like gg, zz, zt, <C-w>k, etc. in the popup:
+        let g:WhichKey_ShowVimActions = "true"
+
+    " }
 
 " }
 
