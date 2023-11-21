@@ -1,7 +1,8 @@
-"  Sergio Kovtunenko v0.8
-"  date: 19.NOV.2023
+"  Sergio Kovtunenko v0.9
+"  date: 21.NOV.2023
 
 " Russian keymaps {
+
     map й q
     map ц w
     map у e
@@ -180,30 +181,24 @@
 
 " General key mappings {
 
-    " Don't use Ex mode, use Q for formatting:
+    " Don't use Ex mode, use Q for formatting (recommendation from IdeaVim plugin page):
     map Q gq
 
-    " clear the search buffer when hitting return:
-    nnoremap <leader>/ :nohlsearch<CR>
-    nnoremap <leader><cr> :nohlsearch<cr>
-    nnoremap <silent> <leader><space> :noh<cr>
+    " System clipboard integration {
 
-    " easy system clipboard copy/paste integration (changed from "+ to "* in version 2.5.0):
-    vmap <leader>y "*y
-    vmap <leader>d "*d
-    nmap <leader>y "*yy
-    nmap <leader>p "*p
-    nmap <leader>P "*P
-    vmap <leader>p "*p
-    vmap <leader>P "*P
+        " easy system clipboard copy/paste integration (changed from "+ to "* in version 2.5.0):
+        vmap <leader>y "*y
+        vmap <leader>d "*d
+        nmap <leader>y "*yy
+        nmap <leader>p "*p
+        nmap <leader>P "*P
+        vmap <leader>p "*p
+        vmap <leader>P "*P
+
+    " }
 
     " Make the Y behave similar to D and C:
     noremap Y y$
-
-    " Navigation for search results:
-    nnoremap n nzz
-    nnoremap N Nzz
-    nnoremap gd gdzz
 
     " Select all text
     nnoremap vv ggVG
@@ -212,16 +207,33 @@
     vnoremap < <gv
     vnoremap > >gv
 
-    " easy window navigation (in split-window mode):
-    nnoremap <C-S-l> <C-w>l
-    nnoremap <C-S-j> <C-w>j
-    nnoremap <C-S-h> <C-w>h
-    nnoremap <C-S-k> <C-w>k
-    " nnoremap <a-h> gT
-    " nnoremap <a-l> gt
-    nnoremap <C-S-tab> gT
-    nnoremap <C-tab> gt
-    nnoremap <tab> <c-w>w
+    " easy window navigation (in split-window mode) {
+
+        nnoremap <C-S-l> <C-w>l
+        nnoremap <C-S-j> <C-w>j
+        nnoremap <C-S-h> <C-w>h
+        nnoremap <C-S-k> <C-w>k
+        " nnoremap <a-h> gT
+        " nnoremap <a-l> gt
+        nnoremap <C-S-tab> gT
+        nnoremap <C-tab> gt
+        nnoremap <tab> <c-w>w
+
+    " }
+
+    " Search functionality in Vim {
+
+        " clear the search buffer when hitting return:
+        nnoremap <leader>/ :nohlsearch<CR>
+        nnoremap <leader><cr> :nohlsearch<cr>
+        nnoremap <silent> <leader><space> :noh<cr>
+
+        " Navigation for search results:
+        nnoremap n nzz
+        nnoremap N Nzz
+        nnoremap gd gdzz
+
+    " }
 
 " }
 
@@ -235,62 +247,92 @@
 
     " }
 
-    " built in search looks better:
-    nnoremap / :action Find<CR>
-    xnoremap / :action Find<CR>
-    " but preserve ideavim search:
-    nnoremap g/ /
+    " Search functionality in Idea {
 
-    " built-in navigation to navigated items works better
-    noremap <C-o> :action Back<CR>zt
-    noremap <C-i> :action Forward<CR>zt
-    " but preserve ideavim defaults
-    nnoremap g<C-o> <C-o>
-    nnoremap g<C-i> <C-i>
+        " built in search looks better:
+        nnoremap / :action Find<CR>
+        xnoremap / :action Find<CR>
+        " but preserve ideavim search:
+        nnoremap g/ /
+
+    " }
+
+    " built-in navigation to navigated items works better {
+
+        noremap <C-o> :action Back<CR>zt
+        noremap <C-i> :action Forward<CR>zt
+        " but preserve ideavim defaults
+        nnoremap g<C-o> <C-o>
+        nnoremap g<C-i> <C-i>
+
+    " }
 
     " Navigation / Quick Info (extracted from my config) {
 
+        " Hierarchies:
         nnoremap <leader>c :action CallHierarchy<CR>
         nnoremap <leader>C :action TypeHierarchy<CR>
         nnoremap <leader><C-c> :action MethodHierarchy<CR>
 
+        " Usages:
         nnoremap <leader>a :action ShowUsages<CR>
+        xnoremap <leader>a :action ShowUsages<CR>
         nnoremap <leader>A :action FindUsages<CR>
+        xnoremap <leader>A :action FindUsages<CR>
         nnoremap <leader>s :action FindUsages<CR>
+        xnoremap <leader>s :action FindUsages<CR>
 
+        " Go to mnemonic:
         nnoremap <leader>j :action GotoImplementation<CR>zt
         nnoremap <leader>k :action GotoSuperMethod<CR>zt
         nnoremap <leader>gt :action GotoTest<cr>zt
 
         nnoremap <leader>W :action ParameterInfo<CR>
+        xnoremap <leader>W :action ParameterInfo<CR>
         nnoremap <leader>w :action QuickImplementations<CR>
+        xnoremap <leader>w :action QuickImplementations<CR>
         nnoremap <leader>q :action QuickJavaDoc<CR>
+        xnoremap <leader>q :action QuickJavaDoc<CR>
         nnoremap <leader>Q :action ShowHoverInfo<CR>
+        xnoremap <leader>Q :action ShowHoverInfo<CR>
 
         nnoremap <leader>m :action FileStructurePopup<CR>
         nnoremap <leader>E :action RecentFiles<CR>
 
         nnoremap <leader>o :action GotoClass<CR>
+        xnoremap <leader>o :action GotoClass<CR>
         nnoremap <leader>O :action GotoFile<CR>
+        xnoremap <leader>O :action GotoFile<CR>
         nnoremap <leader><C-o> :action GotoSymbol<CR>
+        xnoremap <leader><C-o> :action GotoSymbol<CR>
 
         " !!! "Identifier Highlighter Reloaded" plugin mapping (plugin must be installed!)
-        noremap <C-.> :action NextIdentifierReloaded<CR>zz
-        noremap <C-,> :action PreviousIdentifierReloaded<CR>zz
+        nnoremap <C-.> :action NextIdentifierReloaded<CR>zz
+        xnoremap <C-.> :action NextIdentifierReloaded<CR>zz
+        nnoremap <C-,> :action PreviousIdentifierReloaded<CR>zz
+        xnoremap <C-,> :action PreviousIdentifierReloaded<CR>zz
 
         " !!! Previous/next methods:
         nnoremap <C-j> :action MethodDown<CR>zt
+        xnoremap <C-j> :action MethodDown<CR>zt
         nnoremap <C-k> :action MethodUp<CR>zt
+        xnoremap <C-k> :action MethodUp<CR>zt
         nnoremap [m :action MethodUp<cr>zt
+        xnoremap [m :action MethodUp<cr>zt
         nnoremap ]m :action MethodDown<cr>zt
+        xnoremap ]m :action MethodDown<cr>zt
         " nnoremap [q :action PreviousOccurence<cr>
         " nnoremap ]q :action NextOccurence<cr>
         " nnoremap [c :action VcsShowPrevChangeMarker<cr>
         " nnoremap ]c :action VcsShowNextChangeMarker<cr>
         nnoremap <C-h> :action EditorCodeBlockStart<CR>zt
+        xnoremap <C-h> :action EditorCodeBlockStart<CR>zt
         nnoremap <C-l> :action EditorCodeBlockEnd<CR>zz
+        xnoremap <C-l> :action EditorCodeBlockEnd<CR>zz
         noremap <leader>[ :action EditorCodeBlockStart<CR>zt
+        xoremap <leader>[ :action EditorCodeBlockStart<CR>zt
         noremap <leader>] :action EditorCodeBlockEnd<CR>zz
+        xoremap <leader>] :action EditorCodeBlockEnd<CR>zz
 
     " }
 
