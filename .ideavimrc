@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.9
-"  date: 21.NOV.2023
+"  Sergio Kovtunenko v0.10
+"  date: 22.NOV.2023
 
 " Russian keymaps {
 
@@ -351,6 +351,8 @@
         xnoremap [m :action MethodUp<cr>zt
         nnoremap ]m :action MethodDown<cr>zt
         xnoremap ]m :action MethodDown<cr>zt
+        nnoremap <leader>x :action JumpToLastChange<CR>zt
+        xnoremap <leader>x :action JumpToLastChange<CR>zt
         " nnoremap [q :action PreviousOccurence<cr>
         " nnoremap ]q :action NextOccurence<cr>
         " nnoremap [c :action VcsShowPrevChangeMarker<cr>
@@ -378,6 +380,23 @@
         nnoremap <leader>8 :action ActivateDatabaseToolWindow<CR>
         nnoremap <leader>9 :action ActivateGitView<CR>
         nnoremap <leader>0 :action ActivateTerminalToolWindow<CR>
+
+    " }
+
+    " Functional F1-F12 keybindings {
+
+        noremap <F2> :action GotoNextError<CR>
+        noremap <S-F2> :action GotoPreviousError<CR>
+
+        noremap <F3> :action FindNext<CR>
+        noremap <S-F3> :action FindPrevious<CR>
+
+        noremap <F4> :action EditSource<CR>
+
+        noremap <F5> :action CopyElement<CR>
+
+        noremap <F6> :action Move<CR>
+        noremap <S-F6> :action RenameElement<CR>
 
     " }
 
@@ -484,6 +503,14 @@
     sethandler <C-S-H> a:vim
     sethandler <C-S-J> a:vim
     sethandler <C-S-K> a:vim
+    sethandler <F2> a:vim
+    sethandler <S-F2> a:vim
+    sethandler <F3> a:vim
+    sethandler <S-F3> a:vim
+    sethandler <F4> a:vim
+    sethandler <F5> a:vim
+    sethandler <F6> a:vim
+    sethandler <S-F6> a:vim
 
     sethandler <C-1> a:ide
     sethandler <C-2> a:ide
