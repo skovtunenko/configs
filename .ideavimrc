@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.10
-"  date: 22.NOV.2023
+"  Sergio Kovtunenko v0.9
+"  date: 21.NOV.2023
 
 " Russian keymaps {
 
@@ -150,17 +150,6 @@
 
     set commentary
 
-    " Plugin `EasyMotion` (additional plugins AceJump and IdeaVim-EasyMotion installation required) {
-
-        " !! Keep in mind that labels should be typed in lower case !!
-        Plug 'easymotion/vim-easymotion'
-        set easymotion
-        " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
-        " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
-        " let g:EasyMotion_override_acejump = 0
-
-    " }
-
     " Plugin 'IdeaVimExtension' (required additional plugin to be installed) {
 
         set keep-english-in-normal-and-restore-in-insert
@@ -198,6 +187,17 @@
         " set timeoutlen=5000
         " By default Which-Key will only display key mappings which are defined in the .ideavimrc file. If you wish it can also display default VIM actions like gg, zz, zt, <C-w>k, etc. in the popup:
         let g:WhichKey_ShowVimActions = "true"
+
+    " }
+
+    " Plugin `EasyMotion` (additional plugins AceJump and IdeaVim-EasyMotion installation required) {
+
+            " !! Keep in mind that labels should be typed in lower case !!
+            " Plug 'easymotion/vim-easymotion'
+            " set easymotion
+            " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
+            " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
+            " let g:EasyMotion_override_acejump = 0
 
     " }
 
@@ -251,7 +251,6 @@
         " clear the search buffer when hitting return:
         nnoremap <leader>/ :nohlsearch<CR>
         nnoremap <leader><cr> :nohlsearch<cr>
-        nnoremap <silent> <leader><space> :noh<cr>
 
         " Navigation for search results:
         nnoremap n nzz
@@ -445,7 +444,7 @@
     " vnoremap <leader>t :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action SurroundWithLiveTemplate<CR>
 
     " EasyMotion (AceJump plugin) -- enable the plugin in the config
-    nnoremap <leader><leader> :action AceAction<CR>
+    " nnoremap <leader><leader> :action AceAction<CR>
 
 " }
 
