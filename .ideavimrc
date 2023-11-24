@@ -378,7 +378,7 @@
         nnoremap <leader>6 :action ActivateServicesToolWindow<CR>
         nnoremap <leader>7 :action ActivateBookmarksToolWindow<CR>
         nnoremap <leader>8 :action ActivateDatabaseToolWindow<CR>
-        nnoremap <leader>9 :action ActivateGitView<CR>
+        nnoremap <leader>9 :action ActivateVersionControlToolWindow<CR>
         nnoremap <leader>0 :action ActivateTerminalToolWindow<CR>
 
     " }
