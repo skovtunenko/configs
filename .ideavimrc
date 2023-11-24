@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.10
-"  date: 22.NOV.2023
+"  Sergio Kovtunenko v0.11
+"  date: 23.NOV.2023
 
 " Russian keymaps {
 
@@ -289,13 +289,14 @@
 
     " }
 
-    " built-in navigation to navigated items works better {
+    " built-in navigation to navigated items works better (DOES NOT WORK FOR SOME UNKNOWN REASON????) {
 
-        noremap <C-o> :action Back<CR>zt
-        noremap <C-i> :action Forward<CR>zt
+        " Forward action doesn't work as expected, so I use the the standard mapping:
+        " nnoremap <C-o> :action Back<CR>zt
+        " nnoremap <C-i> :action Forward<CR>zt
         " but preserve ideavim defaults:
-        nnoremap g<C-o> <C-o>
-        nnoremap g<C-i> <C-i>
+        " nnoremap g<C-o> <C-o>
+        " nnoremap g<C-i> <C-i>
 
     " }
 
