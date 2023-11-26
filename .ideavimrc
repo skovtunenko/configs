@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.11
-"  date: 23.NOV.2023
+"  Sergio Kovtunenko v0.12
+"  date: 26.NOV.2023
 
 " Russian keymaps {
 
@@ -250,7 +250,7 @@
 
         " clear the search buffer when hitting return:
         nnoremap <leader>/ :nohlsearch<CR>
-        nnoremap <leader><cr> :nohlsearch<cr>
+        nnoremap <leader><cr> :nohlsearch<CR>
 
         " Navigation for search results:
         nnoremap n nzz
@@ -278,6 +278,9 @@
         " Built in search looks better:
         nnoremap / :action Find<CR>
         xnoremap / :action Find<CR>
+        " IDEA replace action is better:
+        nnoremap <leader><C-/> :action Replace<CR>
+        xnoremap <leader><C-/> :action Replace<CR>
         " But preserve ideavim search:
         nnoremap g/ /
 
