@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.12
-"  date: 26.NOV.2023
+"  Sergio Kovtunenko v0.13
+"  date: 28.NOV.2023
 
 " Russian keymaps {
 
@@ -374,7 +374,8 @@
 
     " IDEA Panels {
 
-        nnoremap <leader>1 :action ActivateProjectToolWindow<CR>
+        " <leader>1 - it was `SelectInProjectView` action:
+        nnoremap <leader>1 :action SelectInProjectView<CR>
         nnoremap <leader>2 :action ActivateFindToolWindow<CR>
         nnoremap <leader>3 :action ActivateStructureToolWindow<CR>
         nnoremap <leader>4 :action ActivateRunToolWindow<CR>
@@ -394,8 +395,6 @@
 
         noremap <F3> :action FindNext<CR>
         noremap <S-F3> :action FindPrevious<CR>
-
-        noremap <F4> :action EditSource<CR>
 
         noremap <F5> :action CopyElement<CR>
 
@@ -511,7 +510,6 @@
     sethandler <S-F2> a:vim
     sethandler <F3> a:vim
     sethandler <S-F3> a:vim
-    sethandler <F4> a:vim
     sethandler <F5> a:vim
     sethandler <F6> a:vim
     sethandler <S-F6> a:vim
