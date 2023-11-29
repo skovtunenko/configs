@@ -1,4 +1,4 @@
-"  Sergio Kovtunenko v0.14
+"  Sergio Kovtunenko v0.15
 "  date: 29.NOV.2023
 
 " Russian keymaps {
@@ -515,6 +515,13 @@
     sethandler <F6> a:vim
     sethandler <S-F6> a:vim
 
+    " Important Windows keys registered with VIM, because MacOS hotkeys working fine in Windows remote desktop:
+    sethandler <C-C> a:vim
+    sethandler <C-V> a:vim
+    sethandler <C-X> a:vim
+    sethandler <C-A> a:vim
+    sethandler <C-S> a:vim
+
     sethandler <C-1> a:ide
     sethandler <C-2> a:ide
     sethandler <C-3> a:ide
@@ -525,10 +532,4 @@
     sethandler <C-8> a:ide
     sethandler <C-9> a:ide
     sethandler <C-0> a:ide
-    sethandler <C-C> a:ide
-    sethandler <C-V> a:ide
-    sethandler <C-X> a:ide
-    sethandler <C-A> a:ide
-    sethandler <C-S> a:ide
-
 "}
