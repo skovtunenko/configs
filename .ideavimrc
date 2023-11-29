@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.13
-"  date: 28.NOV.2023
+"  Sergio Kovtunenko v0.14
+"  date: 29.NOV.2023
 
 " Russian keymaps {
 
@@ -425,6 +425,7 @@
         noremap <leader>ef :action IntroduceField<CR>
         noremap <leader>ep :action IntroduceParameter<CR>
         noremap <leader>ev :action IntroduceVariable<CR>
+        noremap <leader>en :action Inline<CR>
 
     " }
 
