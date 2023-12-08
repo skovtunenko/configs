@@ -232,6 +232,12 @@
     vnoremap < <gv
     vnoremap > >gv
 
+    " Because in Windows the Ctrl+V / Ctrl+X is booked for system clipboard, employ leader combinations to replicate VIM's functionality:
+    nnoremap <leader><C-v> <C-v>
+    xnoremap <leader><C-v> <C-v>
+    nnoremap <leader><C-x> <C-x>
+    xnoremap <leader><C-x> <C-x>
+
     " easy window navigation (in split-window mode) {
 
         " already booked by "move method up and down" functionality:
