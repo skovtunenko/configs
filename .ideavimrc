@@ -1,5 +1,5 @@
-"  Sergio Kovtunenko v0.15
-"  date: 29.NOV.2023
+"  Sergio Kovtunenko v0.16
+"  date: 8.DEC.2023
 
 " Russian keymaps {
 
@@ -234,10 +234,12 @@
 
     " easy window navigation (in split-window mode) {
 
-        nnoremap <C-S-l> <C-w>l
-        nnoremap <C-S-j> <C-w>j
-        nnoremap <C-S-h> <C-w>h
-        nnoremap <C-S-k> <C-w>k
+        " already booked by "move method up and down" functionality:
+        " nnoremap <C-S-l> <C-w>l
+        " nnoremap <C-S-j> <C-w>j
+        " nnoremap <C-S-h> <C-w>h
+        " nnoremap <C-S-k> <C-w>k
+
         " nnoremap <a-h> gT
         " nnoremap <a-l> gt
         nnoremap <C-S-tab> gT
@@ -355,6 +357,10 @@
         xnoremap [m :action MethodUp<cr>zt
         nnoremap ]m :action MethodDown<cr>zt
         xnoremap ]m :action MethodDown<cr>zt
+        nnoremap <C-S-j> :action MoveStatementDown<CR>zt
+        xnoremap <C-S-j> :action MoveStatementDown<CR>zt
+        nnoremap <C-S-k> :action MoveStatementUp<CR>zt
+        xnoremap <C-S-k> :action MoveStatementUp<CR>zt
         nnoremap <leader>x :action JumpToLastChange<CR>zt
         xnoremap <leader>x :action JumpToLastChange<CR>zt
         " nnoremap [q :action PreviousOccurence<cr>
@@ -374,7 +380,6 @@
 
     " IDEA Panels {
 
-        " <leader>1 - it was `SelectInProjectView` action:
         nnoremap <leader>1 :action SelectInProjectView<CR>
         nnoremap <leader>2 :action ActivateFindToolWindow<CR>
         nnoremap <leader>3 :action ActivateStructureToolWindow<CR>
@@ -418,7 +423,7 @@
         nnoremap <leader>R :action RenameElement<CR>
         nnoremap <leader>N :action NewElement<CR>
 
-        " !!! Mnemonic 'extract' a thing
+        " !!! Mnemonic 'extract' a thing:
         nnoremap <leader>em :action ExtractMethod<CR>
         vnoremap <leader>em :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action ExtractMethod<CR>
         noremap <leader>ec :action IntroduceConstant<CR>
