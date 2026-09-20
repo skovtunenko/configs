@@ -1,94 +1,43 @@
-" Sergio Kovtunenko v0.17
-" date: 5.JAN.2024
+" Sergio Kovtunenko v0.22
+" date: 26.AUG.2026
 " Google Sheet: https://docs.google.com/spreadsheets/d/1VE54BbzxpD3eFk_p4M2pVieAHa313k3X1fQCYDa_aeg/
 
-" Russian keymaps {
+" Russian keyboard support {
+    " Native IdeaVim 2.40+ langmap support.
+    " Keep the OS keyboard layout Russian while Normal/Visual mode still uses QWERTY Vim commands.
+    " Insert/Replace text is not translated by langmap.
+    set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-    map й q
-    map ц w
-    map у e
-    map к r
-    map е t
-    map н y
-    map г u
-    map ш i
-    map щ o
-    map з p
-    map х [
-    map ъ ]
-    map ф a
-    map ы s
-    map в d
-    map а f
-    map п g
-    map р h
-    map о j
-    map л k
-    map д l
-    map ж ;
-    map э '
-    map ё \
-    map я z
-    map ч x
-    map с c
-    map м v
-    map и b
-    map т n
-    map ь m
-    map б ,
-    map ю .
-    map Й Q
-    map Ц W
-    map У E
-    map К R
-    map Е T
-    map Н Y
-    map Г U
-    map Ш I
-    map Щ O
-    map З P
-    map Х {
-    map Ъ }
-    map Ф A
-    map Ы S
-    map В D
-    map А F
-    map П G
-    map Р H
-    map О J
-    map Л K
-    map Д L
-    map Ж :
-    map Э "
-    map Я Z
-    map Ч X
-    map С C
-    map М V
-    map И B
-    map Т N
-    map Ь M
-    map Б <
-    map Ю >
-    map Ё /|
+    " Safe Russian-layout punctuation mappings.
+    " Only non-ASCII Russian input characters are mapped, so normal English Vim commands stay intact.
+    set langmap+=ё`,Ё~,№#
+    set langmap+=х[,Х{,ъ],Ъ},ж\\;,Ж:,э',Э\\\",б\\,,Б<,ю.,Ю>
 
+    " Do not apply langmap again to characters produced by mappings.
+    set nolangremap
+
+    " Native IdeaVim Russian input
+    set keymap=russian-jcukenwin
+    " Use ctrl-6 as ctrl-^ to enable russian keyboard layout:
+    set iminsert=0
 " }
 
 
 " General settings {
-
     let mapleader = " "
 
-    set scrolloff=5
-    set laststatus=2
+    set scrolloff=10
+    set history=1000
 
-    " When included, Vim will use the clipboard register '*' for all yank, delete, change and put operations:
-    " before in my config it was: unnamed
+    " Use IntelliJ native paste handling for Vim put operations:
     set clipboard+=ideaput
 
     set idearefactormode=keep
 
     " Sync IdeaJoin (https://github.com/JetBrains/ideavim/blob/master/doc/ideajoin-examples.md) bookmarks and Vim marks:
     set ideamarks
+    " IdeaVim ONLY flag to perform a join via the IDE
+    set ideajoin
 
     " Use visual bell instead of beeping:
     set visualbell
@@ -101,86 +50,115 @@
     " set relativenumber
 
     " message on status line to show current mode
-    set showcmd showmode
-    set hlsearch incsearch
+    set showcmd
+    set showmode
+    set hlsearch
+    set incsearch
 
     " ignore case in search patterns + no ignore case when pattern has uppercase:
-    set smartcase ignorecase
+    set smartcase
+    set ignorecase
 
-    " IdeaVim ONLY flag to perform a join via the IDE
-    set ideajoin
+    " Defines keywords for commands like 'w', '*', etc. In this case, `-` will be part of the word
+    set iskeyword+=-
 
-    " Defines keywords for commands like 'w', '*', etc
-    set iskeyword
+    " Automatically applies the global default flag to substitution commands, simplifying text replacement tasks
+    set gdefault
 
     " maximum number of changes that can be undone
     set undolevels=100
     set mps+=<:>
-
-    set iminsert=0
-    set imsearch=0
-
-    highlight lCursor guifg=NONE guibg=Cyan
 
 " }
 
 
 " Enable plugin emulations inside IDEA (https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins) {
 
-    " Possible values: legacy | on | off https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4264908.0-0
-    set dialogescape=off
-    " https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4264908.0-0
-    set nooneline=off
+    " disable IdeaVim both in dialogs and single-line fields:
+    set ideavimsupport=
 
-    set surround
+    " Plugin `Surround` {
+        " Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change, and add such surroundings in pairs.
+        set surround
+    " }
+
+    " matchit.vim: Extends the % key functionality {
+        set matchit
+    " }
 
     " Plugin `Vim highlightedyank` (additional plugin installation required) {
-
         " Description: https://github.com/machakann/vim-highlightedyank/blob/master/doc/highlightedyank.txt :
-        Plug 'machakann/vim-highlightedyank'
         set highlightedyank
         " let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
         let g:highlightedyank_highlight_duration = "1000"
-
     " }
 
-    " vim-paragraph-motion link: https://github.com/dbakker/vim-paragraph-motion#vim-paragraph-motion
-    Plug 'dbakker/vim-paragraph-motion'
+    " vim-paragraph-motion link: https://github.com/dbakker/vim-paragraph-motion#vim-paragraph-motion {
+        " Normally the { and } motions only match completely empty lines. With this plugin lines that only contain whitespace are also matched.
+        " Plug 'dbakker/vim-paragraph-motion'
+        set vim-paragraph-motion
+    " }
 
-    set multiple-cursors
-
-    set commentary
+    " Comment stuff out {
+        " Use gcc to comment out a line (takes a count), gc to comment out the target of a motion (for example, gcap to comment out a paragraph), gc in visual mode to comment out the selection, and gc in operator pending mode to target a comment. You can also use it as a command, either with a range like :7,17Commentary, or as part of a :global invocation like with :g/TODO/Commentary. That's it.
+        set commentary
+    " }
 
     " Plugin 'IdeaVimExtension' (required additional plugin to be installed) {
-
-        set keep-english-in-normal-and-restore-in-insert
-
+        " Retired in favor of new settings: set keymap=russian-jcukenwin
+        " Intentionally not used here: it switches the OS layout to English in Normal mode.
+        " This config instead keeps the OS layout Russian and uses langmap for Normal/Visual commands.
+        " set keep-english-in-normal-and-restore-in-insert
     " }
 
-    " Plugin `IdeaVim-Sneak` (additional installation required) {
-
+    " Plugin `IdeaVim-Sneak` {
         " Use `s` plus two characters to search forward in document;
         " Use `S` plus two characters to search backward in document;
         " Use `;` and `,` just as with `f` and `F` commands to repeat searches;
-        set sneak
+        " set sneak -> I used `vim-flash` plugin instead
+    " }
 
+    " Plugin `vim-flash` (additional installation required) {
+        " lets you navigate your code with search labels, enhanced character motions.
+        nmap s <Action>(flash.search)
+        xmap s <Action>(flash.search)
+        " enhance vim f (find for char in characters to the right of the current cursor)
+        nmap f <Action>(flash.find)
+        xmap f <Action>(flash.find)
+        " enhance vim F (find for char in characters to the left of the current cursor)
+        nmap F <Action>(flash.find_backward)
+        xmap F <Action>(flash.find_backward)
+        " enhance vim t (till for char in characters to the right of the current cursor)
+        nmap t <Action>(flash.till)
+        xmap t <Action>(flash.till)
+        " enhance vim T (till for char in characters to the left of the current cursor)
+        nmap T <Action>(flash.till_backward)
+        xmap T <Action>(flash.till_backward)
+        " enhance vim ; (Repeat the last f/F/t/T search)
+        nmap ; <Action>(flash.repeat)
+        xmap ; <Action>(flash.repeat)
+        " enhance vim , (Repeat the last f/F/t/T search backward)
+        nmap , <Action>(flash.repeat_backward)
+        xmap , <Action>(flash.repeat_backward)
+    " }
+
+    " Plugin 'NERDTree' (https://github.com/JetBrains/ideavim/blob/master/doc/NERDTree-support.md) {
+        set NERDTree
     " }
 
     " Plugin 'IdeaVim-Quickscope' (additional installation required): {
-
         " !! If you are using `ideavim-sneak` please ensure set quickscope is placed after set sneak !!
-        set quickscope
-        let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-        let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        " set quickscope
+        " let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+        " let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
         " to configure the first occurrence character color. Please use a hex color:
         " let g:qs_primary_color = '#ff0000'
         " to configure the second occurrence character color. Again, please use a hex color:
         " let g:qs_secondary_color = '#ff00ff'
-
     " }
 
     " 'Which-Key' plugin (required additional plugin 'Which-Key' to be installed) {
-
         set which-key
         " suggestion for `Which-key` plugin to disable the timeout option :
         set notimeout
@@ -188,18 +166,22 @@
         " set timeoutlen=5000
         " By default Which-Key will only display key mappings which are defined in the .ideavimrc file. If you wish it can also display default VIM actions like gg, zz, zt, <C-w>k, etc. in the popup:
         let g:WhichKey_ShowVimActions = "true"
-
+        let g:WhichKey_FontSize = 15
+        let g:WhichKey_PrefixColor = "#003049"
+        let g:WhichKey_CommandColor = "#780000"
+        let g:WhichKey_PrefixStyle = "bold"
+        let g:WhichKey_KeyStyle = "italic"
+        let g:WhichKey_SortOrder = "by_key_prefix_first"
+        let g:WhichKey_ShowTypedSequence = "false"
     " }
 
     " Plugin `EasyMotion` (additional plugins AceJump and IdeaVim-EasyMotion installation required) {
-
             " !! Keep in mind that labels should be typed in lower case !!
             " Plug 'easymotion/vim-easymotion'
             " set easymotion
             " if this plugin is enabled then the combination needs to be enabled as well, <leader><leader> is the default
             " This setting DISABLES feature: This plugin maps the shortcuts of AceJump to the corresponding actions in IdeaVim-EasyMotion to improve the experience of AceJump users:
             " let g:EasyMotion_override_acejump = 0
-
     " }
 
 " }
@@ -247,8 +229,6 @@
         " nnoremap <C-S-h> <C-w>h
         " nnoremap <C-S-k> <C-w>k
 
-        " nnoremap <a-h> gT
-        " nnoremap <a-l> gt
         nnoremap <C-S-tab> gT
         nnoremap <C-tab> gt
         nnoremap <tab> <c-w>w
@@ -261,9 +241,9 @@
         nnoremap <leader><cr> :nohlsearch<CR>
 
         " Navigation for search results:
-        nnoremap n nzz
-        nnoremap N Nzz
-        nnoremap gd gdzz
+        nnoremap n nzt
+        nnoremap N Nzt
+        nnoremap gd gdzt
 
     " }
 
@@ -272,87 +252,83 @@
 
 " Leader IDEA-specific mappings {
 
-    nnoremap <leader>s :action SaveAll<CR>
+    nmap <leader>s <Action>(SaveAll)
 
     " Window management {
 
-        nmap <leader>h <action>(PreviousTab)
-        nmap <leader>l <action>(NextTab)
+        nmap <leader>h <Action>(PreviousTab)
+        nmap <leader>l <Action>(NextTab)
 
     " }
 
     " Search functionality in Idea {
 
         " Built in search looks better:
-        nnoremap / :action Find<CR>
-        xnoremap / :action Find<CR>
+        nmap / <Action>(Find)
+        xmap / <Action>(Find)
         " IDEA replace action is better:
-        nnoremap <leader>/ :action Replace<CR>
-        xnoremap <leader>/ :action Replace<CR>
+        nmap <leader>/ <Action>(Replace)
+        xmap <leader>/ <Action>(Replace)
         " But preserve ideavim search:
         nnoremap g/ /
 
-        nnoremap <leader>f :action FindInPath<CR>
-        xnoremap <leader>f :action FindInPath<CR>
+        nmap <leader>f <Action>(FindInPath)
+        xmap <leader>f <Action>(FindInPath)
 
-        nnoremap <leader>F :action ReplaceInPath<CR>
-        xnoremap <leader>F :action ReplaceInPath<CR>
-
-    " }
-
-    " built-in navigation to navigated items works better (DOES NOT WORK FOR SOME UNKNOWN REASON????) {
-
-        " Forward action doesn't work as expected, so I use the the standard mapping:
-        " nnoremap <C-o> :action Back<CR>zt
-        " nnoremap <C-i> :action Forward<CR>zt
-        " but preserve ideavim defaults:
-        " nnoremap g<C-o> <C-o>
-        " nnoremap g<C-i> <C-i>
+        nmap <leader>F <Action>(ReplaceInPath)
+        xmap <leader>F <Action>(ReplaceInPath)
 
     " }
 
     " Navigation / Quick Info (extracted from my config) {
 
-        " Hierarchies:
-        nnoremap <leader>c :action CallHierarchy<CR>
-        nnoremap <leader>C :action TypeHierarchy<CR>
-        nnoremap <leader><C-c> :action MethodHierarchy<CR>
+        " Hierarchies (duplicated because of compatibility with VSCode):
+        nmap <leader>c <Action>(CallHierarchy)
+        nmap <leader>C <Action>(CallHierarchy)
+        nmap <leader>v <Action>(TypeHierarchy)
+        nmap <leader>V <Action>(MethodHierarchy)
 
         " Usages:
-        nnoremap <leader>a :action ShowUsages<CR>
-        xnoremap <leader>a :action ShowUsages<CR>
-        nnoremap <leader>A :action FindUsages<CR>
-        xnoremap <leader>A :action FindUsages<CR>
+        nmap <leader>a <Action>(ShowUsages)
+        xmap <leader>a <Action>(ShowUsages)
+        nmap <leader>A <Action>(FindUsages)
+        xmap <leader>A <Action>(FindUsages)
 
         " Go to mnemonic:
         nnoremap <leader>j :action GotoImplementation<CR>zt
         nnoremap <leader>k :action GotoSuperMethod<CR>zt
         nnoremap <leader>gt :action GotoTest<cr>zt
 
-        nnoremap <leader>W :action ParameterInfo<CR>
-        xnoremap <leader>W :action ParameterInfo<CR>
-        nnoremap <leader>w :action QuickImplementations<CR>
-        xnoremap <leader>w :action QuickImplementations<CR>
-        nnoremap <leader>q :action QuickJavaDoc<CR>
-        xnoremap <leader>q :action QuickJavaDoc<CR>
-        nnoremap <leader>Q :action ShowHoverInfo<CR>
-        xnoremap <leader>Q :action ShowHoverInfo<CR>
+        nmap <leader>W <Action>(ParameterInfo)
+        xmap <leader>W <Action>(ParameterInfo)
+        nmap <leader>w <Action>(QuickImplementations)
+        xmap <leader>w <Action>(QuickImplementations)
+        " !!! this is for compatibility with VSCode VIM mode default setting (https://github.com/VSCodeVim/Vim?tab=readme-ov-file#-vscodevim-tricks):
+        " previously it was <leader>q combination:
+        nmap gh <Action>(ShowHoverInfo)
+        xmap gh <Action>(ShowHoverInfo)
+        nmap <leader>gh <Action>(ShowHoverInfo)
+        xmap <leader>gh <Action>(ShowHoverInfo)
 
-        nnoremap <leader>m :action FileStructurePopup<CR>
-        nnoremap <leader>E :action RecentFiles<CR>
+        nmap <leader>m <Action>(FileStructurePopup)
+        nmap <leader>E <Action>(RecentFiles)
 
-        nnoremap <leader>o :action GotoClass<CR>
-        xnoremap <leader>o :action GotoClass<CR>
-        nnoremap <leader>O :action GotoFile<CR>
-        xnoremap <leader>O :action GotoFile<CR>
-        nnoremap <leader><C-o> :action GotoSymbol<CR>
-        xnoremap <leader><C-o> :action GotoSymbol<CR>
+        nmap <leader>o <Action>(GotoClass)
+        xmap <leader>o <Action>(GotoClass)
+        nmap <leader>O <Action>(GotoFile)
+        xmap <leader>O <Action>(GotoFile)
+        nmap <leader><C-o> <Action>(GotoSymbol)
+        xmap <leader><C-o> <Action>(GotoSymbol)
 
         " !!! "Identifier Highlighter Reloaded" plugin mapping (plugin must be installed!)
-        nnoremap <C-.> :action NextIdentifierReloaded<CR>zz
-        xnoremap <C-.> :action NextIdentifierReloaded<CR>zz
-        nnoremap <C-,> :action PreviousIdentifierReloaded<CR>zz
-        xnoremap <C-,> :action PreviousIdentifierReloaded<CR>zz
+        nnoremap <C-.> :action NextIdentifierReloaded<CR>zt
+        nnoremap <leader>. :action NextIdentifierReloaded<CR>zt
+        xnoremap <C-.> :action NextIdentifierReloaded<CR>zt
+        xnoremap <leader>. :action NextIdentifierReloaded<CR>zt
+        nnoremap <C-,> :action PreviousIdentifierReloaded<CR>zt
+        nnoremap <leader>, :action PreviousIdentifierReloaded<CR>zt
+        xnoremap <C-,> :action PreviousIdentifierReloaded<CR>zt
+        xnoremap <leader>, :action PreviousIdentifierReloaded<CR>zt
 
         " !!! Previous/next methods:
         nnoremap <C-j> :action MethodDown<CR>zt
@@ -377,105 +353,96 @@
         xnoremap <C-h> :action EditorCodeBlockStart<CR>zt
         nnoremap <C-l> :action EditorCodeBlockEnd<CR>zz
         xnoremap <C-l> :action EditorCodeBlockEnd<CR>zz
-        noremap <leader>[ :action EditorCodeBlockStart<CR>zt
-        xoremap <leader>[ :action EditorCodeBlockStart<CR>zt
-        noremap <leader>] :action EditorCodeBlockEnd<CR>zz
-        xoremap <leader>] :action EditorCodeBlockEnd<CR>zz
+        nnoremap <leader>[ :action EditorCodeBlockStart<CR>zt
+        xnoremap <leader>[ :action EditorCodeBlockStart<CR>zt
+        nnoremap <leader>] :action EditorCodeBlockEnd<CR>zz
+        xnoremap <leader>] :action EditorCodeBlockEnd<CR>zz
 
     " }
 
     " IDEA Panels {
 
-        nnoremap <leader>1 :action SelectInProjectView<CR>
-        nnoremap <leader>2 :action ActivateFindToolWindow<CR>
-        nnoremap <leader>3 :action ActivateStructureToolWindow<CR>
-        nnoremap <leader>4 :action ActivateRunToolWindow<CR>
-        nnoremap <leader>5 :action ActivateDebugToolWindow<CR>
-        nnoremap <leader>6 :action ActivateServicesToolWindow<CR>
-        nnoremap <leader>7 :action ActivateBookmarksToolWindow<CR>
-        nnoremap <leader>8 :action ActivateDatabaseToolWindow<CR>
-        nnoremap <leader>9 :action ActivateVersionControlToolWindow<CR>
-        nnoremap <leader>0 :action ActivateTerminalToolWindow<CR>
+        nmap <leader>1 <Action>(SelectInProjectView)
+        nmap <leader>2 <Action>(ActivateFindToolWindow)
+        nmap <leader>3 <Action>(ActivateStructureToolWindow)
+        nmap <leader>4 <Action>(ActivateRunToolWindow)
+        nmap <leader>5 <Action>(ActivateDebugToolWindow)
+        nmap <leader>6 <Action>(ActivateServicesToolWindow)
+        nmap <leader>7 <Action>(ActivateBookmarksToolWindow)
+        nmap <leader>8 <Action>(ActivateDatabaseToolWindow)
+        nmap <leader>9 <Action>(ActivateVersionControlToolWindow)
+        nmap <leader>0 <Action>(ActivateTerminalToolWindow)
 
     " }
 
     " Functional F1-F12 keybindings {
 
-        noremap <F2> :action GotoNextError<CR>
-        noremap <S-F2> :action GotoPreviousError<CR>
+        map <F2> <Action>(GotoNextError)
+        map <S-F2> <Action>(GotoPreviousError)
 
-        noremap <F3> :action FindNext<CR>
-        noremap <S-F3> :action FindPrevious<CR>
+        map <F3> <Action>(FindNext)
+        map <S-F3> <Action>(FindPrevious)
 
-        noremap <F5> :action CopyElement<CR>
+        map <F5> <Action>(CopyElement)
 
-        noremap <F6> :action Move<CR>
-        noremap <S-F6> :action RenameElement<CR>
+        map <F6> <Action>(Move)
+        map <S-F6> <Action>(RenameElement)
 
     " }
 
-    " Commenting (extracted from my config)
-    " nnoremap <leader> :action CommentByBlockComment<CR>
-    " nnoremap <leader>\ :action CommentByLineComment<CR>
-
-    xnoremap <C-S-o> :action OverrideMethods<CR>
-    xnoremap <C-S-i> :action ImplementMethods<CR>
+    map <C-S-o> <Action>(OverrideMethods)
+    map <C-S-i> <Action>(ImplementMethods)
 
     " Refactoring Commands: {
 
-        noremap <leader>G :action Generate<CR>
+        map <leader>G <Action>(Generate)
 
-        nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
-        nnoremap <leader>R :action RenameElement<CR>
-        nnoremap <leader>N :action NewElement<CR>
+        nmap <leader>r <Action>(Refactorings.QuickListPopupAction)
+        nmap <leader>R <Action>(RenameElement)
+        nmap <leader>N <Action>(NewElement)
 
         " !!! Mnemonic 'extract' a thing:
-        nnoremap <leader>em :action ExtractMethod<CR>
+        nmap <leader>em <Action>(ExtractMethod)
         vnoremap <leader>em :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action ExtractMethod<CR>
-        noremap <leader>ec :action IntroduceConstant<CR>
-        noremap <leader>ef :action IntroduceField<CR>
-        noremap <leader>ep :action IntroduceParameter<CR>
-        noremap <leader>ev :action IntroduceVariable<CR>
-        noremap <leader>en :action Inline<CR>
+        map <leader>ec <Action>(IntroduceConstant)
+        map <leader>ef <Action>(IntroduceField)
+        map <leader>ep <Action>(IntroduceParameter)
+        map <leader>ev <Action>(IntroduceVariable)
+        map <leader>en <Action>(Inline)
 
     " }
 
     " Debugging/Run {
 
         " Breakpoints management:
-        nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
-        nnoremap <leader>br :action ViewBreakpoints<cr>
+        nmap <leader>bb <Action>(ToggleLineBreakpoint)
+        nmap <leader>br <Action>(ViewBreakpoints)
 
         " Debug and Run configurations:
-        nnoremap \d :action ChooseDebugConfiguration<CR>
-        nnoremap \D :action Debug<cr>
-        nnoremap \r :action ChooseRunConfiguration<CR>
-        nnoremap \R :action Run<cr>
+        nmap \d <Action>(ChooseDebugConfiguration)
+        nmap \D <Action>(Debug)
+        nmap \r <Action>(ChooseRunConfiguration)
+        nmap \R <Action>(Run)
 
     " }
 
     " Git VCS (extracted from my config) {
 
         " Compare (extracted from my config)   keep in mind that <leader>d conflicts with cut into system buffer, but works fine!
-        nnoremap <leader>d :action Compare.SameVersion<CR>
-        noremap <leader>D :action CompareClipboardWithSelection<CR>
+        nmap <leader>d <Action>(Compare.SameVersion)
+        map <leader>D <Action>(CompareClipboardWithSelection)
 
-        nnoremap <leader>T :action Vcs.UpdateProject<CR>
-        nnoremap <leader>t :action CheckinProject<CR>
-        nnoremap <leader><C-t> :action Vcs.Push<CR>
-        nnoremap <leader>K :action Git.Stash<CR>
-        nnoremap <leader>L :action Git.Unstash<CR>
-        nnoremap <leader>J :action Vcs.QuickListPopupAction<CR>
-        nnoremap <leader>H :action Vcs.ShowTabbedFileHistory<CR>
-        nnoremap <leader>Z :action ChangesView.Revert<CR>
-        nnoremap <leader>ga :action Annotate<CR>
-
-        " Git random junk:
-        " noremap <leader>gl :action Vcs.Show.Log<CR>
+        nmap <leader>T <Action>(Vcs.UpdateProject)
+        nmap <leader>t <Action>(CheckinProject)
+        nmap <leader><C-t> <Action>(Vcs.Push)
+        nmap <leader>K <Action>(Git.Stash)
+        nmap <leader>L <Action>(Git.Unstash)
+        nmap <leader>J <Action>(Vcs.QuickListPopupAction)
+        nmap <leader>H <Action>(Vcs.ShowTabbedFileHistory)
+        nmap <leader>Z <Action>(ChangesView.Revert)
+        nmap <leader>ga <Action>(Annotate)
 
     " }
-
-    " vnoremap <leader>t :<BS><BS><BS><BS><BS>action VimVisualSwapSelections<CR>:action SurroundWithLiveTemplate<CR>
 
     " EasyMotion (AceJump plugin) -- enable the plugin in the config
     " nnoremap <leader><leader> :action AceAction<CR>
@@ -496,12 +463,13 @@
     sethandler <C-R> a:vim
     sethandler <C-T> a:vim
     sethandler <C-W> a:vim
+    sethandler <Tab> a:vim
+    sethandler <S-Tab> a:vim
     sethandler <C-Tab> a:vim
     sethandler <C-S-Tab> a:vim
     sethandler <C-S-2> a:vim
     sethandler <C-S-6> a:vim
     sethandler <C-B> a:vim
-    sethandler <C-C> a:vim
     sethandler <C-E> a:vim
     sethandler <C-G> a:vim
     sethandler <C-H> a:vim
@@ -509,6 +477,7 @@
     sethandler <C-K> a:vim
     sethandler <C-N> a:vim
     sethandler <C-S-O> a:vim
+    sethandler <C-S-i> a:vim
     sethandler <C-Q> a:vim
     sethandler <C-U> a:vim
     sethandler <C-Y> a:vim
@@ -526,12 +495,23 @@
     sethandler <F6> a:vim
     sethandler <S-F6> a:vim
 
-    " Important Windows keys registered with VIM, because MacOS hotkeys working fine in Windows remote desktop:
+    " Important Windows keys registered with VIM, because Macos hotkeys working fine in Windows remote desktop:
     sethandler <C-C> a:vim
     sethandler <C-V> a:vim
     sethandler <C-X> a:vim
     sethandler <C-A> a:vim
     sethandler <C-S> a:vim
+    sethandler <C-PageUp> a:vim
+    sethandler <C-PageDown> a:vim
+    sethandler <C-Up> a:vim
+    sethandler <C-Down> a:vim
+    sethandler <S-Enter> a:ide
+    sethandler <S-Left> a:ide
+    sethandler <C-Left> a:ide
+    sethandler <S-Up> a:ide
+    sethandler <S-Right> a:ide
+    sethandler <C-Right> a:ide
+    sethandler <S-Down> a:ide
 
     sethandler <C-1> a:ide
     sethandler <C-2> a:ide
